@@ -4,7 +4,7 @@ defmodule KrishedgesSpace.SessionController do
   def create(conn, %{"user" => %{"password" => pass, "username" => username}}) do
     user = Repo.get_by(KrishedgesSpace.User, username: username)
     case KrishedgesSpace.Auth.login_by_username_and_pass(conn, user, pass) do
-      {:ok, jwt, full_claims} ->
+      {:ok, jwt, _claims} ->
         conn
         |> put_status(:ok)
         |> render(KrishedgesSpace.UserView, "show.json", user: user, token: jwt)
@@ -15,7 +15,7 @@ defmodule KrishedgesSpace.SessionController do
     end
   end
 
-  def unauthenticated(conn, _params) do
+  def unauthenticated(conn, _reason, _ ) do
     conn
     |> put_status(:unauthorized)
     |> render(KrishedgesSpace.UserView, "error.json", message: "Sorry, you must be logged in to perform this action.")

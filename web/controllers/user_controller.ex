@@ -5,6 +5,7 @@ defmodule KrishedgesSpace.UserController do
 
   plug :scrub_params, "user" when action in [:create, :update]
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } }
+  plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # To allow sign up add - when not action in [:create]
 
   def index(conn, _params) do
     users = Repo.all(User)
@@ -17,6 +18,8 @@ defmodule KrishedgesSpace.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         {:ok, jwt, full_claims} = Guardian.encode_and_sign(user, :api)
+        # Here we get our token(jwt) from Guardian
+        {:ok, jwt, _claims} = Guardian.encode_and_sign(user, :api)
         conn
         |> put_status(:created)
         |> put_resp_header("location", user_path(conn, :show, user))
