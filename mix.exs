@@ -37,7 +37,8 @@ defmodule KrishedgesSpace.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 1.2"},
-     {:guardian, "~> 0.9.0"}]
+     {:guardian, "~> 0.9.0"},
+     {:corsica, "~> 0.4"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

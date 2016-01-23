@@ -15,6 +15,12 @@ defmodule KrishedgesSpace.Router do
     plug Guardian.Plug.LoadResource
   end
 
+  scope "/api", KrishedgesSpace do
+    pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/sessions", SessionController, only: [:create]
+  end
+
   scope "/", KrishedgesSpace do
     pipe_through :browser # Use the default browser stack
     get "/", StaticController, :public
@@ -23,9 +29,5 @@ defmodule KrishedgesSpace.Router do
     get "/*path", StaticController, :public
   end
 
-  scope "/api", KrishedgesSpace do
-    pipe_through :api
-    resources "/users", UserController, except: [:new, :edit]
-    resources "/sessions", SessionController, only: [:create]
-  end
+
 end
