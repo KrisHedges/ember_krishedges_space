@@ -1,3 +1,16 @@
-<h2 id="title">Welcome to Admin</h2>
-{{#link-to "about"}}About{{/link-to}}
-{{outlet}}
+<header>
+  {{#if isAuthenticated }}
+    <ul class="menu">
+      <li>{{#link-to "index"}}Home{{/link-to}}</li>
+      <li>{{#link-to "users"}}Users{{/link-to}}</li>
+    </ul>
+  {{/if}}
+  {{#if currentUser}}
+    <span class="welcom"> Welcome Back {{currentUser.username}}</span>
+    <a href="" {{action "logout"}}>Logout</a>
+  {{/if}}
+</header>
+<div class="page">
+  {{outlet}}
+</div>
+
