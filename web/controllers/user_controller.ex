@@ -3,7 +3,7 @@ defmodule KrishedgesSpace.UserController do
   alias KrishedgesSpace.User
 
   plug :scrub_params, "user" when action in [:create, :update]
-  plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # To allow sign up add - when not action in [:create]
+  plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # when not action in [:index, :create]
 
   def index(conn, _params) do
     users = Repo.all(User)
