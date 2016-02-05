@@ -18,7 +18,9 @@ defmodule KrishedgesSpace.Router do
   scope "/api", KrishedgesSpace do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]
+    resources "/roles", RoleController
     resources "/sessions", SessionController, only: [:create]
+    resources "/posts", PostController
   end
 
   scope "/", KrishedgesSpace do

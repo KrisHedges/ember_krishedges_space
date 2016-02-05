@@ -35,7 +35,7 @@ defmodule KrishedgesSpace.Endpoint do
     key: "_krishedges_space_key",
     signing_salt: "PG0GBOeA"
 
-  plug Corsica, [origins: ["http://localhost:4200"], allow_headers: ["accept", "authorization"]]
+  plug Corsica, [origins: ["http://localhost:4200"], allow_headers: ["accept", "authorization", "content-type"]]
 
   plug KrishedgesSpace.Router
 end

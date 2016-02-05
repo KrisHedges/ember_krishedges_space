@@ -1,0 +1,20 @@
+<h2>Edit {{model.username}}</h2>
+<form id="user-edit-form" {{action "edit" on="submit"}}>
+  {{input type="text" value=model.username placeholder="Username"}}
+  <br/>
+  {{input type="text" value=model.email placeholder="Email"}}
+  <br/>
+  {{#if isAdmin }}
+    <select id="user-role-select" {{action "selectRole" on="change"}}>
+      <option value="" disabled> - Select Role</option>
+      {{#each roles as |role|}}
+        {{#if (eq role model.role)}}
+          <option value={{role}} selected>{{role}}</option>
+        {{else}}
+          <option value={{role}}>{{role}}</option>
+        {{/if}}
+      {{/each}}
+    </select>
+  {{/if}}
+  <button type="submit" class="btn">Save</button>
+</form>

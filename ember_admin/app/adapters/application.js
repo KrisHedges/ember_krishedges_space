@@ -1,7 +1,8 @@
 import DS from "ember-data";
+import config from '../config/environment';
 
 export default DS.RESTAdapter.extend({
-  host: 'http://localhost:4000/api',
+  host: config.apiURL,
   sessionService: Ember.inject.service('session'),
   authToken: Ember.computed.alias('sessionService.authToken'),
 
@@ -11,7 +12,11 @@ export default DS.RESTAdapter.extend({
     };
   }),
 
-  shouldReloadAll() {
+  shouldReloadAll: function() {
+    return true;
+  },
+
+  shouldBackgroundReloadRecord: function(store, snapshot){
     return true;
   }
 });

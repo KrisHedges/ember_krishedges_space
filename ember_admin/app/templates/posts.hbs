@@ -1,0 +1,11 @@
+<aside>
+  <ul class="menu">
+    {{#each model as |post|}}
+      <li>{{#link-to 'posts.edit' post.id}}{{post.title}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</aside>
+<div class="page">
+  {{outlet}}
+</div>
+

@@ -1,4 +1,10 @@
-<h2>Users</h2>
-{{#each user in model}}
-  {{user.username}}
-{{/each}}
+<aside>
+  <ul class="menu">
+    {{#each model as |user|}}
+      <li>{{#link-to 'users.user' user.id}}{{user.username}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</aside>
+<div class="page">
+  {{outlet}}
+</div>

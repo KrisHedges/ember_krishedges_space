@@ -1,0 +1,19 @@
+<form id="post-edit-form" {{action "create" on="submit"}}>
+  <div class="post-meta">
+    <label>Published: </label>
+    {{input type="checkbox" name="published" checked=model.published}}
+    <label>URL: </label>
+    {{input type="text" value=model.slug placeholder=model.url_safe_title class="slug"}}
+    <button type="submit" class="btn">Save</button>
+  </div>
+  <div class="post-editor">
+    {{input type="text" value=model.title placeholder="Title"}}
+    {{textarea type="text" value=model.body placeholder=""}}
+  </div>
+  <div class="post-edit-preview">
+    <h1>{{model.title}}</h1>
+    {{{format-markdown model.body}}}
+  </div>
+</form>
+
+

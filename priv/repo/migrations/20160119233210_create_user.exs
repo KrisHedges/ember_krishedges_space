@@ -10,4 +10,5 @@ defmodule KrishedgesSpace.Repo.Migrations.CreateUser do
     end
     create unique_index(:users, [:username])
   end
+
 end

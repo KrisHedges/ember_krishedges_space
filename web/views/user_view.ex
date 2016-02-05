@@ -18,12 +18,12 @@ defmodule KrishedgesSpace.UserView do
 
   def render("user.json", %{user: user}) do
     %{id: user.id,
-      username: user.username
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      inserted_at: user.inserted_at,
+      password: ''
     }
-  end
-
-  def render("error.json", %{message: message}) do
-    %{error: message}
   end
 
 end

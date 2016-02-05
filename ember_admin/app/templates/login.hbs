@@ -1,5 +1,5 @@
-<form {{action "login" username password on="submit"}}>
-{{input type="text" value=username}}
-{{input type="password" value=password}}
-<button type="submit" class="btn">Log in!</button>
+<form id="login-form" {{action "login" username password on="submit"}}>
+  {{input type="text" value=username}}
+  {{input type="password" value=password}}
+  <button type="submit" class="btn">Log in!</button>
 </form>

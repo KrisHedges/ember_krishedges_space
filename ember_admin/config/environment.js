@@ -12,10 +12,13 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
-
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+    flashMessageDefaults: {
+      // flash message defaults
+      timeout: 3300
     }
   };
 
@@ -25,13 +28,15 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.apiURL = 'http://localhost:4000/api';
+
     ENV.contentSecurityPolicy = {
       'default-src': "'none'",
       'script-src': "'self'",
       'font-src': "'self'",
-      'connect-src': "'self' http://localhost:4000",
-      'img-src': "'self'",
-      'style-src': "'self'",
+      'connect-src': "'self' http://localhost:4000 http://localhost:4200",
+      'img-src': " * 'self'",
+      'style-src': "'self' 'unsafe-inline'",
       'media-src': "'self'"
     };
   }
@@ -49,7 +54,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.apiURL = '/api';
   }
 
   return ENV;

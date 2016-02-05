@@ -14,4 +14,13 @@ defmodule KrishedgesSpace.ErrorView do
   def template_not_found(_template, assigns) do
     render "500.html", assigns
   end
+
+  def render("errors.json", %{ changeset: changeset }) do
+    %{ errors: [changeset] }
+  end
+
+  def render("error.json", %{ message: message }) do
+    %{ errors: [ %{ notice: message } ] }
+  end
+
 end

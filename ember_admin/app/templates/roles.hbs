@@ -1,0 +1,7 @@
+<h2>Possible Roles</h2>
+<ul>
+  {{#each model as |role|}}
+  <h4>{{role.fullname}}</h4>
+  <p>{{role.description}}</p>
+  {{/each}}
+</ul>

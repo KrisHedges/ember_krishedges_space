@@ -1,0 +1,6 @@
+{{#link-to 'posts.edit' model.id}}Edit{{/link-to}}
+<h2>{{model.title}}</h2>
+<h4>{{model.slug}}</h4>
+<h5>{{#if model.published}}Published: {{model.published_at}},{{else}}Drafted: {{model.inserted_at}}{{/if}} by: {{model.author_name}} - {{model.author_email}}</h5>
+<h5>Last Edited: {{model.last_edit}}</h5>
+<div class="body">{{{format-markdown model.body}}}</div>

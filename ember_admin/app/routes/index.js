@@ -1,6 +1,8 @@
 import Ember from 'ember';
-import ifAuthorized from '../mixins/authorization';
+import authorization from '../mixins/authorization';
 
-export default Ember.Route.extend( ifAuthorized, {
-
+export default Ember.Route.extend( authorization, {
+  beforeModel: function() {
+    this.redirectUnauthenticated("login");
+  }
 });
