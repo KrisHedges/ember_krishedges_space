@@ -6,7 +6,7 @@ defmodule KrishedgesSpace.Post do
     field :slug, :string
     field :body, :string
     field :published, :boolean, default: false
-    field :published_at, Ecto.Date
+    field :published_at, Ecto.DateTime
     belongs_to :user, KrishedgesSpace.User
     embeds_many :edits, KrishedgesSpace.Edit, on_replace: :delete
 

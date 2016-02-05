@@ -23,10 +23,17 @@ export default DS.Model.extend({
     }
   }),
 
-  last_edit: Ember.computed('edits', function(){
-    let editor = this.get('edits').sortBy('inserted_at').get('lastObject').get('user').get('username');
+  last_edit_time: Ember.computed('edits', function(){
     let time = this.get('edits').sortBy('inserted_at').get('lastObject').get('inserted_at');
-    return moment(time).format('MMMM Do YYYY, h:mm:ss A') + " by: " + editor;
+    return time ? moment(time).format('MMMM Do YYYY, h:mm:ss A') : false;
+  }),
+
+  last_editor_name: Ember.computed('edits', function(){
+    return this.get('edits').sortBy('inserted_at').get('lastObject').get('user').get('username');
+  }),
+
+  last_editor_email: Ember.computed('edits', function(){
+    return this.get('edits').sortBy('inserted_at').get('lastObject').get('user').get('email');
   }),
 
   published_date: Ember.computed('published_at', function(){

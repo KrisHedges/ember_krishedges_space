@@ -13,7 +13,6 @@ body, html
 aside
   grid-unit(12%)
   height 100%
-  border-right 1px solid #ccc
   .menu
     grid-unit(100%)
     height 100%
@@ -61,14 +60,14 @@ aside
   100%
     right 0.5em
     opacity 0.3
+
 aside
   border-right 1px solid #aeaeae
-  border-top 1px solid #9a9a9a
   .menu
     li
       margin-top 0px
       a
-        background linear-gradient(to bottom, 0% #eee, 100% #ddd)
+        background linear-gradient(to bottom, 0% #eee, 100% #ededed)
         border-bottom 1px solid #9a9a9a
         padding 1em 1em 1em 1em
         text-decoration none
@@ -191,7 +190,8 @@ img[alt~="center"]
       margin 0.25em 1em 0.25em 0
       padding 0.25em
   .post-meta
-    background #ccc
+    background linear-gradient(to bottom, 0% #eee, 100% #ededed)
+    border-bottom 1px solid #9a9a9a
     .edit-info
       float right
       margin 0.7em
@@ -203,9 +203,10 @@ img[alt~="center"]
       color white
       border none
       outline none
-      margin 0.25em 1em
-      padding 0.25em
+      margin 0.3em 1em
+      padding 0.5em 0.7em
       font-weight 100
+      font-size 0.8em
       border-radius 3px
       &:active
       &:hover

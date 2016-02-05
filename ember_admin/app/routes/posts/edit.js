@@ -23,6 +23,8 @@ export default Ember.Route.extend( authorization,{
   actions: {
     update: function(){
       var self = this;
+      // If no slug is given attempt to set it from title
+      if(!this.currentModel.get('slug')){ this.currentModel.set('slug', this.currentModel.get('url_safe_title'));}
       self.currentModel.save().then(function(){
         self.flashMessages.success("The post has been Updated!");
         self.transitionTo('posts');

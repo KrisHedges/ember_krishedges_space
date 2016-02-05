@@ -3,7 +3,6 @@ defmodule KrishedgesSpace.PostController do
   use Guardian.Phoenix.Controller
 
   alias KrishedgesSpace.Post
-  require IEx
   plug :scrub_params, "post" when action in [:create, :update]
 
   def index(conn, _params, current_user, claims) do
@@ -14,6 +13,11 @@ defmodule KrishedgesSpace.PostController do
   def create(conn, %{"post" => post_params}, current_user, claims) do
     edit = %KrishedgesSpace.Edit{user_id: current_user.id}
     changeset = Post.changeset(%Post{}, post_params) |> Ecto.Changeset.put_embed(:edits, [edit])
+
+    # If Published is true set the published_at Date
+    if Map.get(post_params, "published") do
+      changeset = Ecto.Changeset.put_change(changeset, :published_at, Ecto.DateTime.utc)
+    end
 
     case Repo.insert(changeset) do
       {:ok, post} ->
@@ -36,6 +40,17 @@ defmodule KrishedgesSpace.PostController do
     post = Repo.get!(Post, id)
     edit = %KrishedgesSpace.Edit{user_id: current_user.id}
     changeset = Post.changeset(post, post_params) |> Ecto.Changeset.put_embed(:edits, post.edits ++ [edit])
+
+    # If Published is False set the published_at Date to Nil
+    # If published is true and there is no published_at Date add new date
+    case Map.get(post_params, "published") do
+      true ->
+        if !Map.get(post_params, "published_at") do
+          changeset = Ecto.Changeset.put_change(changeset, :published_at, Ecto.DateTime.utc)
+        end
+      false ->
+        changeset = Ecto.Changeset.put_change(changeset, :published_at, nil)
+    end
 
     case Repo.update(changeset) do
       {:ok, post} ->

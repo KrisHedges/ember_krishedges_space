@@ -1,6 +1,4 @@
 # TODO
-- auto make post slug if it isn't provided
-- deal with publishing and unpublishing
 - clean up more UI around posts and the various dashboards
 - add categories CRUD
 - category selection to post

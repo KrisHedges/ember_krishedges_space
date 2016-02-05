@@ -7,7 +7,7 @@ defmodule KrishedgesSpace.Repo.Migrations.CreatePost do
       add :slug, :string
       add :body, :text
       add :published, :boolean, default: false
-      add :published_at, :date
+      add :published_at, :datetime
 
       timestamps
     end

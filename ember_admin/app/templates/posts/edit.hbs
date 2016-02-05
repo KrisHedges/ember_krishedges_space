@@ -1,11 +1,11 @@
 <form id="post-edit-form" {{action "update" on="submit"}}>
   <div class="post-meta">
-    <label>Published: </label>
+    <label>Publish: </label>
     {{input type="checkbox" name="published" checked=model.published}}
     <label>URL: </label>
     {{input type="text" value=model.slug placeholder=model.url_safe_title class="slug"}}
-    <button type="submit" class="btn">Save</button>
-    <span class="edit-info">Last Edited: {{model.last_edit}}</span>
+    <button type="submit" class="btn">{{#if model.published}}Save & Publish{{else}}Save Draft{{/if}}</button>
+    <span class="edit-info">Last Edited: {{model.last_edit_time}}, by: {{model.last_editor_name}} - {{model.last_editor_email}}</span>
   </div>
   <div class="post-editor">
     {{input type="text" value=model.title placeholder="Title"}}
@@ -13,7 +13,7 @@
   </div>
   <div class="post-edit-preview">
     <h1>{{model.title}}</h1>
-    <h5>{{#if model.published}}Published: {{model.published_date}},{{else}}Drafted: {{model.inserted_at}}{{/if}} by: {{model.author_name}} - {{model.author_email}}</h5>
+    <h5>{{#if model.published}}Published: {{#if model.published_date}}{{model.published_date}}{{else}} Publishing... {{/if}}, by: {{model.author_name}} - {{model.author_email}} {{else}}Last Draft: {{#if model.last_edit_time}}{{model.last_edit_time}}{{else}}Drafting...{{/if}}, by: {{model.last_editor_name}} - {{model.last_editor_email}}{{/if}}</h5>
     {{{format-markdown model.body}}}
   </div>
 </form>
