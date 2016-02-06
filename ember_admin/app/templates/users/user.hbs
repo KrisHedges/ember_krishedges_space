@@ -1,12 +1,14 @@
-{{model.username}}
-{{model.email}}
-{{model.role}}
+<div class="user">
+  {{model.username}}
+  {{model.email}}
+  {{model.role}}
 
-{{#if (or isUser isAdmin) }}
-  {{#link-to 'users.edit' model.id}}Edit{{/link-to}}
-  {{#link-to 'users.change-password' model.id}}Change Password{{/link-to}}
-{{/if}}
+  {{#if (or isUser isAdmin) }}
+    {{#link-to 'users.edit' model.id}}Edit{{/link-to}}
+    {{#link-to 'users.change-password' model.id}}Change Password{{/link-to}}
+  {{/if}}
 
-{{#if isAdmin}}
-  <button {{action 'deleteUser' model }} >Delete</button>
-{{/if}}
+  {{#if isAdmin}}
+    <button {{action 'deleteUser' model }} >Delete</button>
+  {{/if}}
+</div>

@@ -1,24 +1,26 @@
-<h2>New User</h2>
-<form id="user-edit-form" {{action "create" on="submit"}}>
-  {{input type="text" value=model.username placeholder="Username"}}
-  <br/>
-  {{input type="text" value=model.email placeholder="Email"}}
-  <br/>
-  {{input type="password" value=model.password placeholder="Password"}}
-  <br/>
-  {{input type="password" value=model.confirm placeholder="Confirm Password"}}
-  <br/>
-  {{#if isAdmin }}
-    <select id="user-role-select" {{action "selectRole" on="change"}}>
-      <option value="" disabled> - Select Role</option>
-      {{#each roles as |role|}}
-        {{#if (eq role model.role)}}
-          <option value={{role}} selected>{{role}}</option>
-        {{else}}
-          <option value={{role}}>{{role}}</option>
-        {{/if}}
-      {{/each}}
-    </select>
-  {{/if}}
-  <button type="submit" class="btn">Save</button>
-</form>
+<div class="user">
+  <h2>New User "{{model.username}}"</h2>
+  <form id="user-edit-form" {{action "create" on="submit"}}>
+    {{input type="text" value=model.username placeholder="Username"}}
+    <br/>
+    {{input type="text" value=model.email placeholder="Email"}}
+    <br/>
+    {{input type="password" value=model.password placeholder="Password"}}
+    <br/>
+    {{input type="password" value=model.confirm placeholder="Confirm Password"}}
+    <br/>
+    {{#if isAdmin }}
+      <select id="user-role-select" {{action "selectRole" on="change"}}>
+        <option value="" disabled> - Select Role</option>
+        {{#each roles as |role|}}
+          {{#if (eq role model.role)}}
+            <option value={{role}} selected>{{role}}</option>
+          {{else}}
+            <option value={{role}}>{{role}}</option>
+          {{/if}}
+        {{/each}}
+      </select>
+    {{/if}}
+    <button type="submit" class="btn">Save</button>
+  </form>
+</div>

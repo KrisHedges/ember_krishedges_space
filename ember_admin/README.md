@@ -1,5 +1,4 @@
 # TODO
-- clean up more UI around posts and the various dashboards
 - add categories CRUD
 - category selection to post
 

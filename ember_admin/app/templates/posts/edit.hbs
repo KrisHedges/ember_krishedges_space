@@ -4,7 +4,8 @@
     {{input type="checkbox" name="published" checked=model.published}}
     <label>URL: </label>
     {{input type="text" value=model.slug placeholder=model.url_safe_title class="slug"}}
-    <button type="submit" class="btn">{{#if model.published}}Save & Publish{{else}}Save Draft{{/if}}</button>
+    <button type="submit">{{#if model.published}}Save & Publish{{else}}Save Draft{{/if}}</button>
+    <button {{action "deletePost"}} class="delete">Delete</button>
     <span class="edit-info">Last Edited: {{model.last_edit_time}}, by: {{model.last_editor_name}} - {{model.last_editor_email}}</span>
   </div>
   <div class="post-editor">

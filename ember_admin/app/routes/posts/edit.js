@@ -20,6 +20,8 @@ export default Ember.Route.extend( authorization,{
     return this.store.findRecord('post', params.post_id);
   },
 
+  isDeleting: false,
+
   actions: {
     update: function(){
       var self = this;
@@ -35,7 +37,20 @@ export default Ember.Route.extend( authorization,{
       });
     },
 
+    deletePost: function(){
+      if (confirm("Are you sure you want to delete this Post?")) {
+        this.set('isDeleting', true);
+        this.currentModel.deleteRecord();
+        this.currentModel.save();
+        this.transitionTo('posts');
+        return true;
+      }
+    },
+
     willTransition: function(transition){
+      if (this.isDeleting){
+        return true
+      }
       if (this.currentModel.get('hasDirtyAttributes')){
         if (confirm("Are you sure you want to leave without saving your changes?")) {
           this.currentModel.rollbackAttributes();
