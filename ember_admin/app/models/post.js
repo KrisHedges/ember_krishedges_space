@@ -9,10 +9,16 @@ export default DS.Model.extend({
   published_at: DS.attr('date'),
   inserted_at: DS.attr('date'),
   edits: DS.hasMany('edit'),
-  user: DS.belongsTo('user'),
+  categories: DS.hasMany('category', {async: true}),
+  user: DS.belongsTo('user', {async: true}),
 
   author_name: Ember.computed.alias('user.username'),
   author_email: Ember.computed.alias('user.email'),
+
+
+  alpha_categories: Ember.computed('categories', function(){
+    return this.get('categories').sortBy('name');
+  }),
 
   url_safe_title: Ember.computed('title', function(){
     let title = this.get('title')
@@ -38,6 +44,6 @@ export default DS.Model.extend({
 
   published_date: Ember.computed('published_at', function(){
     let time = this.get('published_at');
-    return moment(time).format('MMMM Do YYYY, h:mm:ss A');
+    return time ? moment(time).format('MMMM Do YYYY, h:mm:ss A') : false;
   })
 });

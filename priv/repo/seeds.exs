@@ -11,6 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 alias KrishedgesSpace.User
 alias KrishedgesSpace.Post
+alias KrishedgesSpace.Category
 
 admin_changeset = User.changeset(%User{},%{username: "admin", email: "admin@example.com", password: "123456", role: "admin"})
 editor_changeset = User.changeset(%User{},%{username: "editor", email: "editor@example.com", password: "123456", role: "editor"})
@@ -25,3 +26,10 @@ post3_changeset = Post.changeset(%Post{},%{title: "Mattis Cursus Sollicitudin", 
 KrishedgesSpace.Repo.insert!(post1_changeset)
 KrishedgesSpace.Repo.insert!(post2_changeset)
 KrishedgesSpace.Repo.insert!(post3_changeset)
+
+category1_changeset = Category.changeset(%Category{}, %{name: "Science", description: "Egestas Pharetra Lorem"})
+category2_changeset = Category.changeset(%Category{}, %{name: "Nature", description: "Egestas Pharetra Lorem"})
+category3_changeset = Category.changeset(%Category{}, %{name: "Ecology", description: "Egestas Pharetra Lorem"})
+KrishedgesSpace.Repo.insert!(category1_changeset)
+KrishedgesSpace.Repo.insert!(category2_changeset)
+KrishedgesSpace.Repo.insert!(category3_changeset)

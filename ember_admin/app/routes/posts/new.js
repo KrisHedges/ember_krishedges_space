@@ -18,11 +18,21 @@ export default Ember.Route.extend( authorization,{
 
   model: function(params) {
     var self = this;
-    return this.get('currentUser').then( function(user){
-       return self.store.createRecord('post', {user: user});
+    return this.store.findAll('category').then(function(){
+      return self.get('currentUser').then( function(user){
+         return self.store.createRecord('post', {user: user});
+      });
     });
   },
 
+  allCategories: function(){
+    return this.store.peekAll('category');
+  },
+
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.set('all_categories', this.allCategories() );
+  },
   actions: {
     create: function(){
       let self = this;

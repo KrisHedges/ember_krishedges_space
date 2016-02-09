@@ -16,6 +16,10 @@ Router.map(function() {
     this.route('edit',{path: "/:post_id/edit"});
     this.route('new', {path: "/new"});
   });
+  this.route('categories', function(){
+    this.route('edit',{path: "/:category_id/edit"});
+    this.route('new', {path: "/new"});
+  });
   this.route('login');
 });
 

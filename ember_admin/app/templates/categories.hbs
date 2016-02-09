@@ -1,0 +1,12 @@
+<aside>
+  <ul class="menu">
+    {{#each model as |category|}}
+      <li>{{#link-to 'categories.edit' category.id}}{{category.name}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</aside>
+<div class="page">
+  {{outlet}}
+</div>
+
+

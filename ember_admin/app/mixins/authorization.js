@@ -26,13 +26,15 @@ export default Ember.Mixin.create({
   },
 
   destroySession: function(){
-    this.authorizationTeardown();
     this.set('isAuthenticated', false);
     this.set('authToken', null);
     this.set('currentUser', null);
     this.set('authenticatedRole', null);
     this.setCookie('user.id', "")
     this.setCookie('token', "")
+    this.controllerFor('Application').set('isAuthenticated', false);
+    this.controllerFor('Application').set('currentUser', null);
+    this.controllerFor('Application').set('authenticatedRole', null);
     this.transitionTo('login');
   },
 

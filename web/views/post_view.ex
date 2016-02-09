@@ -18,7 +18,9 @@ defmodule KrishedgesSpace.PostView do
       published_at: post.published_at,
       inserted_at: post.inserted_at,
       user_id: post.user_id,
-      edits: render_many(post.edits, KrishedgesSpace.PostView, "edit.json", as: :edit)}
+      edits: render_many(post.edits, KrishedgesSpace.PostView, "edit.json", as: :edit),
+      categories: Enum.map(post.categories, fn(c) -> c.id end)
+    }
   end
 
   def render("edit.json", %{edit: edit}) do
@@ -26,5 +28,6 @@ defmodule KrishedgesSpace.PostView do
       inserted_at: edit.inserted_at,
       user_id: edit.user_id}
   end
+
 
 end

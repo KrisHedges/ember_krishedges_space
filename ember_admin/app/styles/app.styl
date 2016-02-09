@@ -1,4 +1,7 @@
 @import "super-minimal/super-minimal"
+$green = #219331
+$red = #991111
+@import "components/category-select"
 
 // Layout
 body, html
@@ -168,13 +171,15 @@ img[alt~="center"]
     float left
     margin 0.6em 0.5em 0.5em 0
   label
+    font-weight bold
     float left
-    margin 0.5em 0.5em 0.5em 1em
+    margin 0.5em 0.5em 0.5em 0em
   textarea
     width 90%
     display block
-    height 80%
-    margin 1em 3%
+    min-height 400px
+    height 78%
+    margin 1em 2% 0 2%
     padding 2%
     resize none
   input[type="text"]
@@ -187,21 +192,16 @@ img[alt~="center"]
     &.slug
       float left
       display block
-      width 33%
+      width 49%
       height auto
       margin 0.25em 1em 0.25em 0
       padding 0.25em
   .post-meta
     background linear-gradient(to bottom, 0% #eee, 100% #ededed)
     border-bottom 1px solid #9a9a9a
-    .edit-info
-      float right
-      margin 0.7em
-      padding 0
-      font-size 0.8em
     button
       float right
-      background #219331
+      background $green
       color white
       border none
       outline none
@@ -211,13 +211,49 @@ img[alt~="center"]
       font-size 0.8em
       border-radius 3px
       &.delete
-        background #991111
+        background $red
         &:active
         &:hover
-          background lighten(#991111, 10%)
+          background lighten($red, 10%)
       &:active
       &:hover
-        background lighten(#219331, 10%)
+        background lighten($green, 10%)
+  .post-editor
+    .edit-info
+      grid-unit(100%)
+      padding 0.5em 5% 0 5%
+      font-size 0.8em
+  .post-edit-preview
+    & > h1
+      margin 0
+      & input
+        width 100%
+        margin 0 0 0.5em 0
+        padding-left 0
+        border 0
+        &:required:invalid
+          border-bottom 1px solid #9a9a9a
+// Styles
+@keyframes thinking-dots
+  0%
+    width 0px
+  100%
+    width 24px
+
+.dots
+  display inline-block
+  position relative
+  top 2px
+  margin-left 0.25em
+  animation thinking-dots
+  animation-duration 600ms
+  animation-iteration-count infinite
+  animation-timing-function linear
+  overflow hidden
+  &:after
+    content '...'
+    display inline-block
+
 .user
   grid-unit(100%)
   padding 1em 2%

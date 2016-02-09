@@ -1,0 +1,12 @@
+<div class="user">
+  <h2>New Category "{{model.name}}"</h2>
+  <form {{action "create" on="submit"}}>
+    {{input type="text" value=model.name placeholder="Category Name"}}
+    <br/>
+    {{textarea value=model.description placeholder="Description"}}
+    <br/>
+    <button type="submit" class="btn">Save</button>
+  </form>
+</div>
+
+
