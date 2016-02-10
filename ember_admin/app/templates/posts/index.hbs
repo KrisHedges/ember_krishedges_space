@@ -1,5 +1,7 @@
-<h2>Posts</h2>
-{{#link-to 'posts.new' class='add'}}Add Post{{/link-to}}
+<div class="block-content">
+  <h2>Posts</h2>
+  {{#link-to 'posts.new' class='add'}}Add Post{{/link-to}}
+</div>
 <table>
   <tr>
     <th>
@@ -35,7 +37,7 @@
       </td>
       <td>
         {{#link-to 'posts.edit' post.id class="button" }}Edit{{/link-to}}
-        <a href="" class="button" {{action 'delete'}}>Delete</a>
+        <button {{action 'deletePost' post}} class="negative">Delete</button>
       </td>
     </tr>
   {{/each}}

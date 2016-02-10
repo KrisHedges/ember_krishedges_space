@@ -33,6 +33,7 @@ export default Ember.Route.extend( authorization,{
     this._super(controller, model);
     controller.set('all_categories', this.allCategories() );
   },
+
   actions: {
     create: function(){
       let self = this;
@@ -48,10 +49,6 @@ export default Ember.Route.extend( authorization,{
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
         })
       });
-    },
-
-    showPublishing: function(){
-      $(".publishing-info").toggleClass("visible");
     },
 
     willTransition: function(transition){

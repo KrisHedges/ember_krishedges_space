@@ -23,8 +23,6 @@ export default Ember.Route.extend( authorization,{
     });
   },
 
-  isDeleting: false,
-
   allCategories: function(){
     return this.store.peekAll('category');
   },
@@ -50,18 +48,8 @@ export default Ember.Route.extend( authorization,{
       });
     },
 
-    deletePost: function(){
-      if (confirm("Are you sure you want to delete this Post?")) {
-        this.set('isDeleting', true);
-        this.currentModel.deleteRecord();
-        this.currentModel.save();
-        this.transitionTo('posts');
-        return true;
-      }
-    },
-
     willTransition: function(transition){
-      if (this.isDeleting){
+      if (this.currentModel.get('isDeleted')){
         return true
       }
       if (this.currentModel.get('hasDirtyAttributes')){

@@ -16,6 +16,14 @@ export default Ember.Route.extend(authorization, {
   actions: {
     showPublishing: function(){
       $(".publishing-info").toggleClass("visible");
+    },
+
+    deletePost: function(post){
+      if (confirm("Are you sure you want to delete this Post?")) {
+        post.deleteRecord();
+        post.save();
+        return this.transitionTo('posts');
+      }
     }
   }
 });

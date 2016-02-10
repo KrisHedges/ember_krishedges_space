@@ -10,5 +10,14 @@ export default Ember.Route.extend( authorization,{
     return this.store.findAll('post').then(function(){
       return self.store.findAll('user');
     });
+  },
+  actions: {
+    deleteUser: function(user){
+      if (confirm("Are you sure you want to delete this User?")) {
+        user.deleteRecord();
+        user.save();
+        return this.transitionTo('users');
+      }
+    }
   }
 });

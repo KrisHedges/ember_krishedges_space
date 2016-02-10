@@ -1,5 +1,7 @@
-<h2>Users</h2>
-{{#link-to 'users.new' class="add"}}Add User{{/link-to}}
+<div class="block-content">
+  <h2>Users</h2>
+  {{#link-to 'users.new' class="add"}}Add User{{/link-to}}
+</div>
 <table>
   <tr>
     <th>
@@ -41,7 +43,7 @@
       <td>
         {{#link-to 'users.edit' user.id class='button'}}Edit{{/link-to}}
         {{#link-to 'users.change-password' user.id class='button'}}Change Password{{/link-to}}
-        <button {{action 'delete' user}} >Delete</button>
+        <button {{action 'deleteUser' user}} class="negative" >Delete</button>
       </td>
     </tr>
   {{/each}}
