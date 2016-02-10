@@ -7,7 +7,7 @@ defmodule KrishedgesSpace.CategoryController do
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # when not action in [:index, :create]
 
   def index(conn, _params, current_user, claims) do
-    categories = Repo.all(Category)
+    categories = Repo.all(Category) |> Repo.preload(:posts)
     render(conn, "index.json", categories: categories)
   end
 

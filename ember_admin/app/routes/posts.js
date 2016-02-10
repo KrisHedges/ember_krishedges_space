@@ -11,5 +11,11 @@ export default Ember.Route.extend(authorization, {
     return this.store.findAll('user').then(function(){
       return self.store.findAll('post');
     });
+  },
+
+  actions: {
+    showPublishing: function(){
+      $(".publishing-info").toggleClass("visible");
+    }
   }
 });

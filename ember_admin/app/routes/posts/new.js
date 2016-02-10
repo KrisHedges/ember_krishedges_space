@@ -50,6 +50,10 @@ export default Ember.Route.extend( authorization,{
       });
     },
 
+    showPublishing: function(){
+      $(".publishing-info").toggleClass("visible");
+    },
+
     willTransition: function(transition){
       if (this.currentModel.get('isNew') ){
         if (confirm("Are you sure you want to leave without saving your changes?")) {

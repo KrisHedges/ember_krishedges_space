@@ -1,22 +1,21 @@
 <form id="post-edit-form" {{action "update" on="submit"}}>
-  <div class="post-meta">
-    <button type="submit">{{#if model.published}}Save & Publish{{else}}Save Draft{{/if}}</button>
-    <button {{action "deletePost"}} class="delete">Delete</button>
+  <div class="post-toolbar">
+    <button class="positive" type="submit">{{#if model.published}}Save & Publish{{else}}Save Draft{{/if}}</button>
+    <button {{action "deletePost"}} class="negative">Delete</button>
+    <button {{action 'showPublishing'}} class="show-publishing">Publishing</button>
   </div>
   <div class="post-editor">
-    <div class="edit-info">
-      <strong>Last Edited:</strong> {{model.last_edit_time}}
-      <br>
-      <strong>Author:</strong> {{model.last_editor_name}} - {{model.last_editor_email}}
-      <br>
-      {{#if model.published}}<strong>Published: </strong>{{#if model.published_date }}{{model.published_date}}{{else}} Will Publish on save<span class="dots"></span> {{/if}}<br>{{/if}}
+    <div class="publishing-info">
+      <p class="author"><strong>Author:</strong> {{model.last_editor_name}} - {{model.last_editor_email}}</p>
+      <p class="last-edit"><strong>Last Edited:</strong> {{model.last_edit_time}}</p>
+      <p class="published-date">{{#if model.published}}<strong>Published: </strong>{{#if model.published_date }}{{model.published_date}}{{else}} Will Publish on save<span class="dots"></span> {{/if}}{{/if}}</p>
       <br>
       <label>Publish: </label>{{input type="checkbox" name="published" checked=model.published}}
       <label>URL: </label>{{input type="text" value=model.slug placeholder=model.url_safe_title class="slug"}}
       <br>
       {{category-select selected_alpha_categories=model.alpha_categories all_categories=all_categories post=model}}
     </div>
-    {{textarea type="text" value=model.body placeholder=""}}
+    {{textarea type="text" value=model.body placeholder="Post body goes here... Use Markdown FTW!"}}
   </div>
   <div class="post-edit-preview">
     <h1>{{input type="text" value=model.title placeholder="Add A Title" required="required"}}</h1>

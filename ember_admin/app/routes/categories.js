@@ -7,6 +7,8 @@ export default Ember.Route.extend(authorization,{
   },
 
   model: function(){
-    return this.store.findAll('category');
-  }
+    let self = this;
+    return this.store.findAll('post').then( function(){
+      return self.store.findAll('category');
+    })
 });

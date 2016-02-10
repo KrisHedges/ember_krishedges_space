@@ -1,11 +1,13 @@
 <div class="category-list">
+  <h4>Add Category</h4>
+  <h5>Selected:</h5>
   <div class="selected">
-    <h4>Add A Category from Below</h4>
     {{#each selected_alpha_categories as |category|}}
       <span {{action 'removeCategory' category post}}> - {{category.name}}</span>
     {{/each}}
   </div>
   <hr/>
+  <h5>Available:</h5>
   <div class="available">
     {{#each available_categories as |category|}}
       <span {{action 'addCategory' category post}}> + {{category.name}}</span>

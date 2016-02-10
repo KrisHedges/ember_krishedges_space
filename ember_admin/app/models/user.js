@@ -5,7 +5,16 @@ export default DS.Model.extend({
   email: DS.attr('string'),
   password: DS.attr('string'),
   confirm: "",
-  insertedAt: DS.attr('date'),
+  inserted_at: DS.attr('string'),
   role: DS.attr('string'),
-  posts: DS.hasMany('post')
+  posts: DS.hasMany('post'),
+
+  post_count: Ember.computed('posts', function(){
+    return this.get('posts').length;
+  }),
+
+  created: Ember.computed('inserted_at', function(){
+    let time = this.get('inertedt_at');
+    return moment(time).format('MMMM Do, YYYY');
+  })
 });

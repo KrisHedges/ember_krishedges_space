@@ -3,10 +3,41 @@ $green = #219331
 $red = #991111
 @import "components/category-select"
 
+button()
+  background linear-gradient(to top, 0% #eee, 100% #ededed)
+  color #666
+  border 1px solid #bbb
+  outline none
+  margin 0.25em 0.4em 0.25em 0em
+  padding 0.5em 0.7em
+  font-weight 100
+  font-size 1em
+  border-radius 3px
+  text-decoration none
+  &:active
+  &:hover
+    background #444
+    color #efefef
+    border 1px solid #3f3f3f
+  &.negative
+    &:active
+    &:hover
+      background $red
+      border 1px solid darken($red, 10%)
+  &.positive
+    &:active
+    &:hover
+      background $green
+      border 1px solid darken($green, 10%)
+button,
+.button
+  button()
+
 // Layout
 body, html
   grid()
   height 100%
+  font-size 16px
   & > .ember-view
     height 100%
     &:after
@@ -14,7 +45,7 @@ body, html
       clear both
       display table
 aside
-  grid-unit(12%)
+  grid-unit(14%)
   height 100%
   .menu
     grid-unit(100%)
@@ -26,35 +57,56 @@ aside
         grid-unit(100%)
         height auto
 
+.page
+  grid-unit(86%)
+  height 100%
+  transform translate3d(0, 0, 0)
+
 .alert
-  grid-unit(100%)
-  padding 1em
-  background #ccc
   position fixed
-  top 0
-  left 0
-  z-index 10
+  width 320px
+  top 50px
+  left 50%
+  margin-left -50%
+  padding 1em
+  background #ccc  z-index 10
   opacity 0.8
   text-align center
+  z-index 100
 
-.dashboard
-  grid-unit(86%)
-  padding 1em 2%
+h2
+  margin 1em
 
-.page
-  grid-unit(76%)
+.add
+  button()
+  margin 1em 0.75em 0 1.8em
+  &:before
+    content ' + '
+
+#post-edit-form
+  grid-unit(100%)
   height 100%
-  #post-edit-form
+  .post-toolbar
     grid-unit(100%)
+    height 2.8em
+    position absolute
+    top 0px
+    left 0px
+    z-index 20
+  .post-editor
+    grid-unit(33%)
     height 100%
-    .post-meta
+    .publishing-info
       grid-unit(100%)
-    .post-editor
-      grid-unit(33%)
-      height 95%
-    .post-edit-preview
-      grid-unit(66%)
-      height 95%
+      position absolute
+      box-sizing border-box
+      padding 4%
+      height auto
+  .post-edit-preview
+    grid-unit(67%)
+    height 100%
+    box-sizing border-box
+    padding 36px 4%
 
 
 // Styles
@@ -67,35 +119,42 @@ aside
     opacity 0.3
 
 aside
-  border-right 1px solid #8c8c8c
+  border-right 1px solid #ccc
+  box-sizing border-box
+  font-size 1em
   .menu
+    background #666
     li
       margin-top 0px
       a
-        background linear-gradient(to bottom, 0% #eee, 100% #ededed)
-        border-bottom 1px solid #9a9a9a
-        padding 1em 1em 1em 1em
+        background #efefef
+        border-bottom 1px solid #ccc
+        padding 0.8em 0 0.795em 1em
         text-decoration none
         color #666
-        text-shadow 0px 1px 2px #fff, 0px 0px 2px #ddd
         transition background 80ms ease-in-out
         &.active
           background #333
           color #ccc
           text-shadow none
           cursor default
+          border-top 1px solid #222
           border-bottom 1px solid #222
+          box-shadow inset 0 0 2px #2f2f2f
+          z-index 2
           &:hover
           &:active
             background #333
             color #ccc
             text-shadow none
+            border-top 1px solid #333
+            border-bottom 1px solid #333
         &:active
         &:hover
           background #444
           color #eee
           text-shadow none
-          border-bottom 1px solid #222
+          border-bottom 1px solid #444
         &:active
         &:hover
         &.active
@@ -119,15 +178,138 @@ aside
             animation-direction alternate
             animation-timing-function ease-in-out
 
-aside:nth-of-type(1)
-  z-index 9
-  .menu
-    background #aaa
+#post-edit-form
+  input, textarea
+    border 1px solid #ccc
+    outline none
+  input[type="checkbox"]
+    float left
+    margin 0.6em 0.5em 0.5em 0
+  label
+    font-weight bold
+    float left
+    margin 0.5em 0.5em 0.5em 0em
+  textarea
+    width 100%
+    display block
+    min-height 400px
+    height 100%
+    margin 0
+    padding 2em 4% 4em 4%
+    box-sizing border-box
+    resize none
+    border 0
+    background #2d2d2d
+    color #ccc
+  input[type="text"]
+    display block
+    float left
+    width 90%
+    height auto
+    margin 1em 3%
+    padding 2%
+    &.slug
+      float left
+      display block
+      width 49%
+      height auto
+      margin 0.25em 1em 0.25em 0
+      padding 0.25em
 
-aside:nth-of-type(2)
-  z-index 9
-  .menu
-    background #888
+  .post-toolbar
+    background #efefef
+    border-bottom 1px solid #9a9a9a
+    button
+      button()
+      float right
+    .show-publishing
+      float left
+      margin 0.2em 1em
+
+
+  .post-editor
+    border-top 2.9em solid #2d2d2d
+    .publishing-info
+      background #252525
+      color white
+      font-weight 100
+      opacity 0.99
+      top 0
+      left 0px
+      font-size 0.9em
+      transform translateY(-100%)
+      transition all 200ms linear
+      box-shadow 0px 0px 2px #222
+      border-radius 0 0 1em 1em
+      opacity 0.99
+      p
+        margin 0 0 0.75em 0
+      strong,
+      h4,
+      label
+        font-weight 400
+      input
+        color #333
+      &.visible
+        transform translateY(0%)
+
+  .post-edit-preview
+    border-top 36px solid #efefef
+    & > h1
+      margin 0
+      & input
+        width 100%
+        margin 0 0 0.5em 0
+        padding-left 0
+        border 0
+        border-bottom 1px dashed #eee
+        &:required:invalid
+          border-bottom 1px solid #9a9a9a
+table
+  width 96%
+  margin 2em auto 0 auto
+  border-top 1px solid #9a9a9a
+  border-left 1px solid #9a9a9a
+  th
+    background-color #444
+    color #efefef
+    font-weight 400
+  th, td
+    padding 0.75em
+    text-align left
+    border-bottom 1px solid #9a9a9a
+    border-right 1px solid #9a9a9a
+  tr:nth-child(odd)
+    background-color #efefef
+
+.block-content
+  margin 1.5em
+
+
+// Styles
+@keyframes thinking-dots
+  0%
+    width 0px
+  100%
+    width 24px
+
+.dots
+  display inline-block
+  position relative
+  top 2px
+  margin-left 0.25em
+  animation thinking-dots
+  animation-duration 600ms
+  animation-iteration-count infinite
+  animation-timing-function linear
+  overflow hidden
+  &:after
+    content '...'
+    display inline-block
+
+.user
+  grid-unit(100%)
+  padding 1em 2%
 
 img[alt~="large"]
   max-width 90%
@@ -163,97 +345,10 @@ img[alt~="center"]
   display block
   margin 1em auto 1em auto
 
-#post-edit-form
-  input, textarea
-    border 1px solid #ccc
-    outline none
-  input[type="checkbox"]
-    float left
-    margin 0.6em 0.5em 0.5em 0
-  label
-    font-weight bold
-    float left
-    margin 0.5em 0.5em 0.5em 0em
-  textarea
-    width 90%
-    display block
-    min-height 400px
-    height 78%
-    margin 1em 2% 0 2%
-    padding 2%
-    resize none
-  input[type="text"]
-    display block
-    float left
-    width 90%
-    height auto
-    margin 1em 3%
-    padding 2%
-    &.slug
-      float left
-      display block
-      width 49%
-      height auto
-      margin 0.25em 1em 0.25em 0
-      padding 0.25em
-  .post-meta
-    background linear-gradient(to bottom, 0% #eee, 100% #ededed)
-    border-bottom 1px solid #9a9a9a
-    button
-      float right
-      background $green
-      color white
-      border none
-      outline none
-      margin 0.3em 0.25em
-      padding 0.5em 0.7em
-      font-weight 100
-      font-size 0.8em
-      border-radius 3px
-      &.delete
-        background $red
-        &:active
-        &:hover
-          background lighten($red, 10%)
-      &:active
-      &:hover
-        background lighten($green, 10%)
-  .post-editor
-    .edit-info
-      grid-unit(100%)
-      padding 0.5em 5% 0 5%
-      font-size 0.8em
-  .post-edit-preview
-    & > h1
-      margin 0
-      & input
-        width 100%
-        margin 0 0 0.5em 0
-        padding-left 0
-        border 0
-        &:required:invalid
-          border-bottom 1px solid #9a9a9a
-// Styles
-@keyframes thinking-dots
-  0%
-    width 0px
-  100%
-    width 24px
+@media screen and (max-width: 1330px)
+  body, html
+    font-size 14px
 
-.dots
-  display inline-block
-  position relative
-  top 2px
-  margin-left 0.25em
-  animation thinking-dots
-  animation-duration 600ms
-  animation-iteration-count infinite
-  animation-timing-function linear
-  overflow hidden
-  &:after
-    content '...'
-    display inline-block
-
-.user
-  grid-unit(100%)
-  padding 1em 2%
+@media screen and (max-width: 1200px)
+  body, html
+    font-size 12px

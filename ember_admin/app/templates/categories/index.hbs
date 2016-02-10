@@ -1,4 +1,43 @@
-<div class="dashboard">
-  <h2>Categories</h2>
-  {{#link-to 'categories.new'}}Add Category{{/link-to}}
-</div>
+<h2>Categories</h2>
+{{#link-to 'categories.new' class="add" }}Add Category{{/link-to}}
+<table>
+  <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Short Description
+    </th>
+    <th>
+      Post Count
+    </th>
+    <th>
+      Created
+    </th>
+    <th>
+      Options
+    </th>
+  </tr>
+  {{#each model as |category|}}
+    <tr>
+      <td>
+        {{category.name}}
+      </td>
+      <td>
+        {{category.short_description}}...
+      </td>
+      <td>
+        {{category.post_count}}
+      </td>
+      <td>
+        {{category.created}}
+      </td>
+      <td>
+        {{#link-to 'users.edit' user.id class='button'}}Edit{{/link-to}}
+        {{#link-to 'users.change-password' user.id class='button'}}Change Password{{/link-to}}
+        <button {{action 'delete' user}} >Delete</button>
+      </td>
+    </tr>
+  {{/each}}
+</table>
+

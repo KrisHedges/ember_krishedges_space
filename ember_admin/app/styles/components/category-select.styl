@@ -13,16 +13,26 @@
   -moz-user-select none
   -ms-user-select none
   user-select none
+  h5
+    margin 0.5em 0
+    font-weight 400
+    color #666
+  hr
+    border 1px dashed #666
   span
     cursor pointer
     animation category-fade-in
-    animation-duration 300ms
+    animation-duration 60ms
     animation-iteration-count 1
     animation-timing-function ease-in-out
+    transition all 60ms linear
+    font-weight normal
+    letter-spacing 0.025em
   .selected
     display inline-block
     span
       background #dedede
+      color #333
       border 1px solid #cecece
       border-radius 3px
       float left
@@ -34,7 +44,7 @@
   .available
     display inline-block
     column-count 2
-    max-height 100px
+    max-height 150px
     overflow-y scroll
     span
       &:hover

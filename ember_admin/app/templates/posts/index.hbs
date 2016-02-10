@@ -1,4 +1,42 @@
-<div class="dashboard">
-  <h2>Posts</h2>
-  {{#link-to 'posts.new'}}Add Post{{/link-to}}
-</div>
+<h2>Posts</h2>
+{{#link-to 'posts.new' class='add'}}Add Post{{/link-to}}
+<table>
+  <tr>
+    <th>
+      Title
+    </th>
+    <th>
+      Last Edit
+    </th>
+    <th>
+      Published
+    </th>
+    <th>
+      Author
+    </th>
+    <th>
+      Options
+    </th>
+  </tr>
+  {{#each model as |post|}}
+    <tr>
+      <td>
+        {{post.title}}
+      </td>
+      <td>
+        {{post.last_edit_time}}
+        {{post.last_editor_name}}
+      </td>
+      <td>
+        {{#if post.published}}{{post.published_date}}{{else}}Draft{{/if}}
+      </td>
+      <td>
+        {{post.author_name}}
+      </td>
+      <td>
+        {{#link-to 'posts.edit' post.id class="button" }}Edit{{/link-to}}
+        <a href="" class="button" {{action 'delete'}}>Delete</a>
+      </td>
+    </tr>
+  {{/each}}
+</table>

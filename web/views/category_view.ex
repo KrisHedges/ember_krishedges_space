@@ -12,6 +12,9 @@ defmodule KrishedgesSpace.CategoryView do
   def render("category.json", %{category: category}) do
     %{id: category.id,
       name: category.name,
-      description: category.description}
+      description: category.description,
+      posts: Enum.map(category.posts, fn(p) -> p.id end),
+      inserted_at: category.inserted_at
+    }
   end
 end
