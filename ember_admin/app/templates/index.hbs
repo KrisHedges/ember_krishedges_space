@@ -1,14 +1,59 @@
-<div class="page">
-  <div class="block-content">
+<div class="dashboard">
+
+  <div class="top-column">
     <h2>Dashboard</h2>
-    Todo:
-    <ul>
-      <li>Dashboard</li>
-        <ul>
-          <li>Category Popularity</li>
-          <li>Most Active Users</li>
-          <li>Latest Post</li>
-        </ul>
-    </ul>
+    <h3>Latest Posts</h3>
+    <table>
+      <tr>
+        <th>
+          Title
+        </th>
+        <th>
+          Last Edit
+        </th>
+        <th>
+          Published
+        </th>
+        <th>
+          Author
+        </th>
+        <th>
+          Options
+        </th>
+      </tr>
+      {{#each latestPosts as |post|}}
+        <tr>
+          <td>
+            {{post.title}}
+          </td>
+          <td>
+            {{post.last_edit_time}}
+            {{post.last_editor_name}}
+          </td>
+          <td>
+            {{#if post.published}}{{post.published_date}}{{else}}Draft{{/if}}
+          </td>
+          <td>
+            {{post.author_name}}
+          </td>
+          <td>
+            {{#link-to 'posts.edit' post.id class="button" }}Edit{{/link-to}}
+            <button {{action 'deletePost' post}} class="negative">Delete</button>
+          </td>
+        </tr>
+      {{/each}}
+    </table>
   </div>
+
+  <div class="bottom-column">
+    <h3>Category Frequency</h3>
+    <div class="block-content">
+      {{ember-chart type='Radar' data=categoryFrequency options=radarOptions }}
+    </div>
+    <h3>Most Active Authors</h3>
+    <div class="block-content">
+      {{ember-chart type='Bar' data=mostActiveUsers }}
+    </div>
+  </div>
+
 </div>
