@@ -24,6 +24,13 @@ export default Ember.Route.extend( authorization,{
       };
     },
 
+    cancel: function(){
+      if (confirm("Are you sure you want to leave without saving your changes?")) {
+        this.currentModel.deleteRecord();
+        this.transitionTo('categories');
+      }
+    },
+
     willTransition: function(transition){
       if (this.currentModel.get('isNew') ){
         if (confirm("Are you sure you want to leave without saving your changes?")) {

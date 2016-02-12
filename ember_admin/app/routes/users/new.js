@@ -49,9 +49,18 @@ export default Ember.Route.extend( authorization,{
         });
       };
     },
+
     selectRole: function() {
       this.setRole();
     },
+
+    cancel: function(){
+      if (confirm("Are you sure you want to leave without saving your changes?")) {
+        this.currentModel.deleteRecord();
+        this.transitionTo('users');
+      }
+    },
+
     willTransition: function(transition){
       if (this.currentModel.get('isNew') ){
         if (confirm("Are you sure you want to leave without saving your changes?")) {
