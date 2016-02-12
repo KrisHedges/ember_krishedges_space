@@ -1,11 +1,12 @@
-<div class="user">
+<div class="block-content">
   <h2>Edit {{model.name}}</h2>
-  <form {{action "update" on="submit"}}>
-    {{input type="text" value=model.name placeholder="Category Name"}}
-    <br/>
-    {{textarea value=model.description placeholder="Description"}}
-    <br/>
-    <button type="submit" class="btn">Save</button>
-  </form>
 </div>
-
+<form {{action "update" on="submit"}}>
+  {{input type="text" value=model.name placeholder="Category Name"}}
+  <br/>
+  {{textarea value=model.description placeholder="Description"}}
+  <br/>
+  <fieldset>
+    <button type="submit" class="btn">Save</button>
+  </fieldset>
+</form>

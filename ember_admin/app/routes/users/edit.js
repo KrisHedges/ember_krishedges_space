@@ -48,7 +48,7 @@ export default Ember.Route.extend( authorization,{
             self.destroySession();
           }
         }
-        self.transitionTo('users.user', model);
+        self.transitionTo('users');
       }).catch(function(reason){
         self.currentModel.rollbackAttributes();
         reason.errors.forEach(function(error){
@@ -59,6 +59,7 @@ export default Ember.Route.extend( authorization,{
     selectRole: function() {
       this.setRole();
     },
+
     willTransition: function(transition){
       if (this.currentModel.get('hasDirtyAttributes')){
         if (confirm("Are you sure you want to leave without saving your changes?")) {

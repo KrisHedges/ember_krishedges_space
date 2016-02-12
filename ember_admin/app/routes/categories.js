@@ -15,8 +15,10 @@ export default Ember.Route.extend(authorization,{
   actions: {
     deleteCategory: function(cat){
       if (confirm("Are you sure you want to delete this Category?")) {
+        let name = cat.get('name');
         cat.deleteRecord();
         cat.save();
+        this.flashMessages.success("The category '" + name + "' has been deleted.");
         return this.transitionTo('categories');
       }
     }

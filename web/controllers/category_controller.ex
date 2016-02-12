@@ -2,7 +2,7 @@ defmodule KrishedgesSpace.CategoryController do
   use KrishedgesSpace.Web, :controller
   use Guardian.Phoenix.Controller
   alias KrishedgesSpace.Category
-
+  require IEx
   plug :scrub_params, "category" when action in [:create, :update]
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # when not action in [:index, :create]
 
@@ -16,6 +16,7 @@ defmodule KrishedgesSpace.CategoryController do
 
     case Repo.insert(changeset) do
       {:ok, category} ->
+        category = Repo.get!(Category, category.id) |> Repo.preload(:posts)
         conn
         |> put_status(:created)
         |> put_resp_header("location", category_path(conn, :show, category))
@@ -28,12 +29,12 @@ defmodule KrishedgesSpace.CategoryController do
   end
 
   def show(conn, %{"id" => id}, current_user, claims) do
-    category = Repo.get!(Category, id)
+    category = Repo.get!(Category, id) |> Repo.preload(:posts)
     render(conn, "show.json", category: category)
   end
 
   def update(conn, %{"id" => id, "category" => category_params}, current_user, claims) do
-    category = Repo.get!(Category, id)
+    category = Repo.get!(Category, id) |> Repo.preload(:posts)
     changeset = Category.changeset(category, category_params)
 
     case Repo.update(changeset) do
@@ -47,7 +48,7 @@ defmodule KrishedgesSpace.CategoryController do
   end
 
   def delete(conn, %{"id" => id}, current_user, claims) do
-    category = Repo.get!(Category, id)
+    category = Repo.get!(Category, id) |> Repo.preload(:posts)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).

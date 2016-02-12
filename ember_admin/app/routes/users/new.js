@@ -42,7 +42,7 @@ export default Ember.Route.extend( authorization,{
             self.destroySession();
           }
         }
-        self.transitionTo('users.user', model);
+        self.transitionTo('users');
       }).catch(function(reason){
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);

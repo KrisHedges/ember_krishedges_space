@@ -23,16 +23,22 @@ export default Ember.Route.extend( authorization,{
       var self = this;
       if(this.currentModel.get('password') === this.currentModel.get('confirm')){
         this.currentModel.save().then(function(model){
-          self.flashMessages.success("Your password has been changed.");
-          Ember.$('#user-change-password-form')[0].reset();
-          self.transitionTo('users.user', model);
-        }).catch(function(reason){
+          if (self.currentUser == model){
+            self.flashMessages.success("Your password has been changed.");
+            Ember.$('#user-change-password-form')[0].reset();
+            self.destroySession();
+          } else {
+            self.flashMessages.success("The passowrd for '" + model.username + "' has been changed.");
+            Ember.$('#user-change-password-form')[0].reset();
+            self.transitionTo('users');
+          }
+        }), function(reason){
           self.currentModel.rollbackAttributes();
           Ember.$('#user-change-password-form')[0].reset();
           reason.errors.forEach(function(error){
             self.flashMessages.danger(Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
           });
-        });
+        };
       }else{
         this.flashMessages.danger("Your password and confirmation password do not match");
       }
