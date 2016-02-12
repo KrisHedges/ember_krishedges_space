@@ -44,11 +44,18 @@ export default Ember.Route.extend( authorization,{
       self.currentModel.save().then(function(model){
         self.flashMessages.success("A new post has been Added!");
         self.transitionTo('posts');
-      }).catch(function(reason){
+      }), function(reason){
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
         })
-      });
+      };
+    },
+
+    cancel: function(){
+      if (confirm("Are you sure you want to leave without saving your changes?")) {
+        this.currentModel.deleteRecord();
+        this.transitionTo('posts');
+      }
     },
 
     willTransition: function(transition){

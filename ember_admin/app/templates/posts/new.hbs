@@ -1,7 +1,7 @@
 <form class="post-edit-form" {{action "create" on="submit"}}>
   <div class="post-toolbar">
     <button class="positive" type="submit">{{#if model.published}}Save & Publish{{else}}Save Draft{{/if}}</button>
-    <button {{action "deletePost"}} class="negative">Delete</button>
+    <button {{action "cancel"}}>Cancel</button>
     <button {{action 'showPublishing'}} class="show-publishing">Publishing</button>
   </div>
   <div class="post-editor">

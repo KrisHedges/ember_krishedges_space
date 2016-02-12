@@ -49,13 +49,14 @@ export default Ember.Route.extend( authorization,{
           }
         }
         self.transitionTo('users');
-      }).catch(function(reason){
+      }), function(reason){
         self.currentModel.rollbackAttributes();
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
         });
-      });
+      };
     },
+
     selectRole: function() {
       this.setRole();
     },

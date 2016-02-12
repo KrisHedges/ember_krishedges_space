@@ -41,11 +41,11 @@ export default Ember.Route.extend( authorization,{
         self.flashMessages.success("The post has been Updated!");
         self.currentModel.set('hasDirtyAttributes', false);
         self.transitionTo('posts');
-      }).catch(function(reason){
+      }), function(reason){
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
         });
-      });
+      };
     },
 
     willTransition: function(transition){

@@ -19,11 +19,11 @@ export default Ember.Route.extend( authorization,{
       self.currentModel.save().then(function(){
         self.flashMessages.success("The Category has been Updated!");
         self.transitionTo('categories');
-      }).catch(function(reason){
+      }), function(reason){
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
         });
-      });
+      };
     },
 
     deleteCategory: function(){

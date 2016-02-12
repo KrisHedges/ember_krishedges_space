@@ -17,11 +17,11 @@ export default Ember.Route.extend( authorization,{
       self.currentModel.save().then(function(model){
         self.flashMessages.success("A new category has been Added!");
         self.transitionTo('categories');
-      }).catch(function(reason){
+      }), function(reason){
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
         })
-      });
+      };
     },
 
     willTransition: function(transition){
