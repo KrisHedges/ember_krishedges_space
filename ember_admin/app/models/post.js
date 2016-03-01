@@ -1,3 +1,4 @@
+/* global Ember */
 import DS from 'ember-data';
 import moment from 'moment';
 
@@ -5,6 +6,7 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   slug: DS.attr('string'),
   body: DS.attr('string'),
+  description: DS.attr('string'),
   published: DS.attr('boolean'),
   published_at: DS.attr('date'),
   inserted_at: DS.attr('date'),
@@ -21,7 +23,7 @@ export default DS.Model.extend({
   }),
 
   url_safe_title: Ember.computed('title', function(){
-    let title = this.get('title')
+    let title = this.get('title');
     if(title){
       return title.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
     } else {

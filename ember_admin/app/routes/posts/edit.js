@@ -1,3 +1,4 @@
+/* global marked */
 import Ember from 'ember';
 import authorization from '../../mixins/authorization';
 
@@ -41,16 +42,16 @@ export default Ember.Route.extend( authorization,{
         self.flashMessages.success("The post has been Updated!");
         self.currentModel.set('hasDirtyAttributes', false);
         self.transitionTo('posts');
-      }), function(reason){
+      }, function(reason){
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
         });
-      };
+      });
     },
 
     willTransition: function(transition){
       if (this.currentModel.get('isDeleted')){
-        return true
+        return true;
       }
       if (this.currentModel.get('hasDirtyAttributes')){
         if (confirm("Are you sure you want to leave without saving your changes?")) {

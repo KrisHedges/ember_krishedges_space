@@ -1,4 +1,6 @@
 @import "super-minimal/super-minimal"
+@import "fonts"
+
 $green = #219331
 $red = #991111
 @import "components/category-select"
@@ -17,6 +19,105 @@ $red = #991111
     width 0px
   100%
     width 24px
+
+file-extension-icons()
+  a
+    &:before
+      font-family 'icomoon'
+  &.regular
+    & > a
+      &:hover
+        text-decoration none
+      &:before
+        content ' j '
+  &.jpg,
+  &.gif,
+  &.svg,
+  &.png
+    a
+      &:before
+        content ' # '
+  &.pdf
+    a
+      &:before
+        content ' ` '
+  &.doc
+  &.dot
+  &.docx
+  &.docm
+  &.dotx
+  &.dotm
+  &.docb
+    a
+      &:before
+        content ' ~ '
+  &.xls,
+  &.xlt,
+  &.xlm,
+  &.xlsx,
+  &.xlsm,
+  &.xltx,
+  &.xltm,
+  &.xlsb,
+  &.xla,
+  &.xlam,
+  &.xll,
+  &.xlw
+    a
+      &:before
+        content ' ! '
+  &.ppt,
+  &.pot,
+  &.pps,
+  &.pptx,
+  &.pptm,
+  &.potx,
+  &.potm,
+  &.ppam,
+  &.ppsx,
+  &.ppsm,
+  &.sldx,
+  &.sldm
+    a
+      &:before
+        content ' @ '
+  &.zip,
+  &.rar,
+  &.gz,
+  &.bz,
+  &.bz2,
+  &.tar,
+  &.tgz
+    a
+      &:before
+        content ' $ '
+  &.aac,
+  &.aif,
+  &.aiff,
+  &.flac,
+  &.gsm,
+  &.m4a,
+  &.m4b,
+  &.m4,
+  &.mm,
+  &.mp3,
+  &.mpc,
+  &.ms,
+  &.ogg,
+  &.oga,
+  &.raw,
+  &.vox,
+  &.wav,
+  &.wma,
+  &.wv,
+  &.ra,
+  &.rm,
+  &.webm
+    a
+      &:before
+        content ' % '
+
+
 
 
 input, textarea, select
@@ -405,6 +506,247 @@ aside
       border-bottom 1px dashed #eee
       &:required:invalid
         border-bottom 1px solid #9a9a9a
+
+.files
+  grid-unit(55%)
+  margin-top 1em
+  margin-right 5%
+  overflow-y scroll
+  font-size 1.1em
+  line-height 1.2em
+  & .add-directory
+    position relative;
+    margin 0;
+    padding 0;
+    box-sizing border-box;
+    height 30px;
+    line-height 30px
+    letter-spacing 3px
+    display inline
+    background none
+    border none
+    font-size 0.8em
+    font-family 'icomoon'
+    z-index 2
+    color #666
+    background #cfcfcf
+    width 14%
+    &:hover
+      color #efefef
+      background #666
+  .ember-text-field
+    width 82%
+    margin-left 16px
+    margin-bottom 0.5em
+    padding 0.25em
+    height 30px
+    box-sizing border-box
+  button
+    font-size 9px
+  .help-text
+    display block
+    font-size 0.7em
+    margin 0.5em 1em
+    margin-left 16px
+    color #666
+  .dropzone
+    display block
+    position absolute
+    box-sizing border-box
+    width 100%
+    height 30px
+    min-height 30px
+    background none
+    margin 0
+    padding 0
+    border 0px
+    z-index 1
+    .dz-message
+      display block
+      line-height 30px
+      margin 0
+      padding 0
+      color #fff
+    &.dz-drag-hover
+      background-color rgba(#efefef, 60%)
+      cursor default
+      .dz-message
+        color #666
+  & > .dropzone
+    position relative
+    &:before
+      float left
+      font-family 'icomoon'
+      font-size 1.2em
+      line-height 30px
+      color #666
+      content '\0000a0 s p '
+    .dz-message
+      &:after
+        display inline
+        float left
+        color #666
+        content '\0000a0\0000a0\0000a0/public/uploads'
+  ul
+    margin 0
+  li
+    position relative
+    clear both
+    list-style none
+    height 34px
+    min-height 34px
+    border 0px
+    line-height 34px
+    white-space nowrap
+    border-bottom 1px solid #efefef
+    &:focus
+      background-color #efefef
+    ul
+      margin 0
+      padding 0 0 0 1.7em
+      li
+        margin 0
+        padding 0 0 0 0.20em
+    a
+      position relative
+      color #666
+      text-decoration none
+      &:hover
+        text-decoration underline
+      &:before
+          display block
+          float left
+          margin 0 0.75em 0 0
+          font-family 'icomoon'
+          font-size 1.2em
+          top 30px
+    & .remove-file
+      position relative
+      margin 0.1em 1em 0 0
+      padding 0
+      height 30px
+      line-height 30px
+      display inline
+      background none
+      border none
+      font-size 1em
+      font-family 'icomoon'
+      z-index 2
+      color #cfcfcf
+      &:hover
+        color #666
+    & > ul
+      display none
+    &.visible
+      & > ul
+        display block
+    &.directory
+      & > a
+        &:hover
+          text-decoration none
+        &:before
+          position relative
+          display inline
+          margin 0
+          font-family 'icomoon'
+          font-size 1.2em
+          top 0px
+          content 'g o\0000a0'
+          z-index 2
+      &.visible
+        & > a
+          &:before
+            content 's p\0000a0'
+    file-extension-icons()
+
+.dz-filename
+  grid-unit(60%)
+  color #666
+.dz-progress
+  grid-unit(100%)
+  margin 0
+  padding 0
+.dz-upload
+  display block
+  width 0%
+  height 4px
+  margin 0
+  padding 0
+  background-color #cfcfcf
+.dz-remove
+  display block
+  float right
+  height 30px
+  line-height 30px
+  width auto
+  margin 0.2em 0.5em 0 0
+  font-family 'icomoon'
+  cursor pointer
+  text-decoration none !important
+  color #cfcfcf !important
+  &:hover
+    color #666 !important
+.dz-drag-hover
+  .dz-message
+    &:before
+      display inline-block
+      font-family 'icomoon'
+      font-size 1.2em
+      color #666
+      content 'v'
+      transform scaleX(-1)
+      margin 0em 0.5em 0 0
+
+.preview
+  grid-unit(38%)
+  margin-right 2%
+  margin-top 1em
+  .viewer
+    position relative
+    width 100%
+    height 40%
+    min-height 300px
+    background #efefef
+    div
+      position absolute
+      width 100%
+      height 73%
+      a
+        display block
+        width 100%
+        height auto
+        font-size 200px
+        color #666
+        text-align center
+        text-decoration none
+        cursor default
+        margin-top 35px
+      file-extension-icons()
+    img
+      position absolute
+      width auto
+      height auto
+      max-width 90%
+      max-height 90%
+      margin 0 auto
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+  .info
+    .path
+    .name
+      display block
+      width 96%
+      text-align center
+    .name
+      font-size 1.2em
+      margin 1em
+    .path
+      font-size 1em
+      background #efefef
+      padding 2%
+      cursor text
+      overflow scrollable
 
 // Desktop Breakpoints
 @media screen and (max-width: 1330px)

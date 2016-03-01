@@ -10,7 +10,7 @@ export default Ember.Route.extend(authorization,{
     let self = this;
     return this.store.findAll('post').then( function(){
       return self.store.findAll('category');
-    })
+    });
   },
   actions: {
     deleteCategory: function(cat){

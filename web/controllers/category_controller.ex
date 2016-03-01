@@ -4,7 +4,7 @@ defmodule KrishedgesSpace.CategoryController do
   alias KrishedgesSpace.Category
   require IEx
   plug :scrub_params, "category" when action in [:create, :update]
-  plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # when not action in [:index, :create]
+  plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } when not action in [:index, :show]
 
   def index(conn, _params, current_user, claims) do
     categories = Repo.all(Category) |> Repo.preload(:posts)

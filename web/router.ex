@@ -3,16 +3,19 @@ defmodule KrishedgesSpace.Router do
 
   pipeline :browser do
     plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
   end
 
   pipeline :api do
     plug :accepts, ["json"]
     plug Guardian.Plug.VerifyHeader # looks in the session for the token
     plug Guardian.Plug.LoadResource
+  end
+
+  scope "/public-api", KrishedgesSpace do
+    pipe_through :api
+    get "/posts", PostController, :public_index
+    get "/posts/:id", PostController, :show
+    resources "/categories", CategoryController, only: [:index, :show]
   end
 
   scope "/api", KrishedgesSpace do
@@ -22,6 +25,8 @@ defmodule KrishedgesSpace.Router do
     resources "/sessions", SessionController, only: [:create]
     resources "/posts", PostController, except: [:new, :edit]
     resources "/categories", CategoryController, except: [:new, :edit]
+    resources "/uploads", UploadController, only: [:index, :create]
+    delete "/uploads/*path", UploadController, :delete
   end
 
   scope "/", KrishedgesSpace do
@@ -31,6 +36,4 @@ defmodule KrishedgesSpace.Router do
     get "/admin/*path", StaticController, :admin
     get "/*path", StaticController, :public
   end
-
-
 end

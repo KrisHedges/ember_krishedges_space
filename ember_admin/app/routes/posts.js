@@ -1,3 +1,4 @@
+/* global $:false */
 import Ember from 'ember';
 import authorization from '../mixins/authorization';
 

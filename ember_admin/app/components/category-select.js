@@ -7,9 +7,9 @@ export default Ember.Component.extend({
   },
 
   availableCategories: function(){
-    return this.all_categories.filter( function(item, index, enumerable){
-      return !this.post.get('categories').contains(item);
-    }, this).sortBy('name')
+    return this.all_categories.filter( function(category){
+      return !this.post.get('categories').contains(category);
+    }, this).sortBy('name');
   },
 
   actions: {
@@ -18,7 +18,7 @@ export default Ember.Component.extend({
       if (post.get('categories').pushObject(cat)){
         self.set('available_categories', self.availableCategories() );
         post.set('hasDirtyAttributes', true);
-      };
+      }
     },
 
     removeCategory: function(cat, post){
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
       if (post.get('categories').removeObject(cat)){
         self.set('available_categories', self.availableCategories() );
         post.set('hasDirtyAttributes', true);
-      };
+      }
     }
   }
 });

@@ -9,7 +9,7 @@ defmodule KrishedgesSpace.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/", from: :krishedges_space, gzip: true, cache_control_for_etags: "public, max-age=31536000", cache_control_for_vsn_requests: "public, max-age=31536000",
-    only: ~w(public admin css fonts images js favicon.ico robots.txt)
+    only: ~w(uploads public admin css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -35,7 +35,7 @@ defmodule KrishedgesSpace.Endpoint do
     key: "_krishedges_space_key",
     signing_salt: "PG0GBOeA"
 
-  plug Corsica, [origins: ["http://localhost:4200"], allow_headers: ["accept", "authorization", "content-type"]]
+  plug Corsica, [origins: ["http://localhost:4200"], allow_headers: ["accept", "authorization", "content-type", "cache-control", "x-requested-with"]]
 
   plug KrishedgesSpace.Router
 end

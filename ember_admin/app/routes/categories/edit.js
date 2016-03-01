@@ -15,15 +15,18 @@ export default Ember.Route.extend( authorization,{
 
   actions: {
     update: function(){
-      var self = this;
+      let self = this;
       self.currentModel.save().then(function(){
         self.flashMessages.success("The Category has been Updated!");
         self.transitionTo('categories');
-      }), function(reason){
-        reason.errors.forEach(function(error){
-          self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
+      }, function(reason){
+        return reason.errors.forEach(function(error){
+          let error_name = Object.keys(error)[0].capitalize();
+          let error_message = error[Object.keys(error)[0]];
+          let flash_message = error_name + ":  " + error_message;
+          self.flashMessages.danger(flash_message);
         });
-      };
+      });
     },
 
     deleteCategory: function(){
@@ -38,7 +41,7 @@ export default Ember.Route.extend( authorization,{
 
     willTransition: function(transition){
       if (this.isDeleting){
-        return true
+        return true;
       }
       if (this.currentModel.get('hasDirtyAttributes')){
         if (confirm("Are you sure you want to leave without saving your changes?")) {

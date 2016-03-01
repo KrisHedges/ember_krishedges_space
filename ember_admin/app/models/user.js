@@ -1,3 +1,5 @@
+/* global Ember */
+/* global moment */
 import DS from 'ember-data';
 // User
 export default DS.Model.extend({

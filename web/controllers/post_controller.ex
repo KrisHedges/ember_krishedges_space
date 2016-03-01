@@ -6,7 +6,7 @@ defmodule KrishedgesSpace.PostController do
   alias KrishedgesSpace.PostCategory
 
   plug :scrub_params, "post" when action in [:create, :update]
-  plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # when not action in [:index, :create]
+  plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } when not action in [:public_index, :show]
 
   def index(conn, _params, current_user, claims) do
     posts = Repo.all(Post) |> Repo.preload(:categories)
@@ -14,17 +14,21 @@ defmodule KrishedgesSpace.PostController do
   end
 
 
+  def public_index(conn, _params, current_user, claims) do
+    query = from p in Post, where: p.published == true
+    posts = Repo.all(query) |> Repo.preload(:categories)
+    render(conn, "index.json", posts: posts)
+  end
+
 
   def create(conn, %{"post" => post_params}, current_user, claims) do
     edit = %KrishedgesSpace.Edit{user_id: current_user.id}
     changeset = Post.changeset(%Post{}, post_params) |> Ecto.Changeset.put_embed(:edits, [edit])
 
-
     # If Published is true set the published_at Date
     if Map.get(post_params, "published") do
       changeset = Ecto.Changeset.put_change(changeset, :published_at, Ecto.DateTime.utc)
     end
-
 
     case Repo.insert(changeset) do
       {:ok, post} ->
@@ -51,12 +55,10 @@ defmodule KrishedgesSpace.PostController do
   end
 
 
-
   def show(conn, %{"id" => id}, current_user, claims) do
     post = Repo.get!(Post, id) |> Repo.preload(:categories)
     render(conn, "show.json", post: post)
   end
-
 
 
   def update(conn, %{"id" => id, "post" => post_params}, current_user, claims) do
@@ -103,10 +105,8 @@ defmodule KrishedgesSpace.PostController do
   end
 
 
-
   def delete(conn, %{"id" => id}, current_user, claims) do
     post = Repo.get!(Post, id) |> Repo.preload([:post_categories, :categories])
-
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -114,4 +114,6 @@ defmodule KrishedgesSpace.PostController do
 
     send_resp(conn, :no_content, "")
   end
+
+
 end

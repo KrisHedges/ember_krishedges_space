@@ -1,3 +1,4 @@
+/*global Ember */
 import DS from "ember-data";
 import config from '../config/environment';
 
@@ -16,7 +17,7 @@ export default DS.RESTAdapter.extend({
     return true;
   },
 
-  shouldBackgroundReloadRecord: function(store, snapshot){
+  shouldBackgroundReloadRecord: function(){
     return true;
   }
 });

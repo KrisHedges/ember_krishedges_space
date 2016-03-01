@@ -1,0 +1,11 @@
+{{render 'header'}}
+<section>
+<dl>
+  <dt>{{#link-to 'show' latest_music_post.slug}}{{ latest_music_post.title }}{{/link-to}}</dt>
+  <dd>{{ latest_music_post.published_date }}</dd>
+  <dt>{{#link-to 'show' latest_art_post.slug}}{{ latest_art_post.title }}{{/link-to}}</dt>
+  <dd>{{ latest_art_post.published_date }}</dd>
+  <dt>{{#link-to 'show' latest_web_post.slug}}{{ latest_web_post.title }}{{/link-to}}</dt>
+  <dd>{{ latest_web_post.published_date }}</dd>
+</dl>
+</section>

@@ -1,0 +1,9 @@
+<header>
+  <ul class="main-menu">
+    <li>{{#link-to 'application' }}Home{{/link-to}}</li>
+    {{#each model as |page|}}
+      <li>{{#link-to 'show' page.slug}}{{page.title}}{{/link-to}}</li>
+    {{/each}}
+    <li>{{#link-to 'posts'}}Blog{{/link-to}}</li>
+  </ul>
+</header>

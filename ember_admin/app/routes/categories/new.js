@@ -7,21 +7,21 @@ export default Ember.Route.extend( authorization,{
     this.redirectUnauthenticated("login");
   },
 
-  model: function(params) {
+  model: function() {
     return this.store.createRecord('category');
   },
 
   actions: {
     create: function(){
       let self = this;
-      self.currentModel.save().then(function(model){
+      self.currentModel.save().then(function(){
         self.flashMessages.success("A new category has been Added!");
         self.transitionTo('categories');
-      }), function(reason){
+      }, function(reason){
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
-        })
-      };
+        });
+      });
     },
 
     cancel: function(){

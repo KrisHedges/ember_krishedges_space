@@ -1,0 +1,11 @@
+<div class="viewer">
+{{#if isImage}}
+  <img src={{model.path}}>
+{{else}}
+  <div class='regular {{model.extension}}'><a href=""></a></div>
+{{/if}}
+</div>
+<div class="info">
+  <span class="name">{{model.filename}}</span>
+  <span class="path">{{model.path}}</span>
+</div>

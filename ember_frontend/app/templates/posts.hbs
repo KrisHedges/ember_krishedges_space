@@ -1,0 +1,6 @@
+{{render 'header'}}
+<section>
+  {{#each model as |post|}}
+   <p>{{#link-to 'show' post.slug}}{{post.title}} - {{post.published_date}}{{/link-to}}</p>
+  {{/each}}
+</section>

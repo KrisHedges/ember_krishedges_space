@@ -6,7 +6,7 @@ export default Ember.Route.extend( authorization,{
     this.redirectUnauthenticated("login");
   },
   model: function() {
-    let self = this
+    let self = this;
     return this.store.findAll('post').then(function(){
       return self.store.findAll('user');
     });

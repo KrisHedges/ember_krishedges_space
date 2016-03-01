@@ -1,3 +1,4 @@
+/* global Chart */
 import Ember from 'ember';
 import authorization from '../mixins/authorization';
 
@@ -21,16 +22,16 @@ export default Ember.Route.extend( authorization, {
       let cat = {};
       cat.name = category.get('name');
       cat.frequency = Math.round(category.get('post_count') / totalPosts * 100);
-      return cat
+      return cat;
     });
     let chart_data = {};
-    chart_data.labels = category_post_frequency.map(function(item){return item.name});
+    chart_data.labels = category_post_frequency.map(function(item){return item.name;});
     chart_data.datasets = [{
-      fillColor: "rgba(220,220,220,0.5)",
-      strokeColor: "rgba(220,220,220,0.8)",
-      highlightFill: "rgba(220,220,220,0.75)",
-      highlightStroke: "rgba(220,220,220,1)",
-      data: category_post_frequency.map(function(item){return item.frequency})
+      fillColor: "#efefef",
+      strokeColor: "#444",
+      highlightFill: "#444",
+      highlightStroke: "#efefef",
+      data: category_post_frequency.map(function(item){return item.frequency;})
     }];
     return chart_data;
   },
@@ -44,13 +45,13 @@ export default Ember.Route.extend( authorization, {
       return data;
     });
     let chart_data = {};
-    chart_data.labels = user_post_frequency.map(function(item){return item.username});
+    chart_data.labels = user_post_frequency.map(function(item){return item.username;});
     chart_data.datasets = [{
-      fillColor: "rgba(220,220,220,0.5)",
-      strokeColor: "rgba(220,220,220,0.8)",
-      highlightFill: "rgba(220,220,220,0.75)",
-      highlightStroke: "rgba(220,220,220,1)",
-      data: user_post_frequency.map(function(item){return item.frequency})
+      fillColor: "#efefef",
+      strokeColor: "#444",
+      highlightFill: "#444",
+      highlightStroke: "#efefef",
+      data: user_post_frequency.map(function(item){return item.frequency;})
     }];
     return chart_data;
   },
@@ -63,7 +64,8 @@ export default Ember.Route.extend( authorization, {
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.scaleFontSize = 15;
     Chart.defaults.global.maintainAspectRatio = true;
-    let radarOptions = {pointLabelFontSize: 15}
+    Chart.defaults.global.showTooltips = false;
+    let radarOptions = {pointLabelFontSize: 15};
     this.controllerFor('index').set('categoryFrequency', this.categoryFrequency());
     this.controllerFor('index').set('radarOptions', radarOptions);
     this.controllerFor('index').set('mostActiveUsers', this.mostActiveUsers());

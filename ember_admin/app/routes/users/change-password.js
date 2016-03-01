@@ -11,7 +11,7 @@ export default Ember.Route.extend( authorization,{
   },
 
   afterModel: function(model){
-    if((this.get('currentUser').get('id') == model.get('id')) || (this.get('authenticatedRole') == "admin")){
+    if((this.get('currentUser').get('id') === model.get('id')) || (this.get('authenticatedRole') === "admin")){
       return false;
     } else {
       this.transitionTo('users.user', model.get('id'));
@@ -23,7 +23,7 @@ export default Ember.Route.extend( authorization,{
       var self = this;
       if(this.currentModel.get('password') === this.currentModel.get('confirm')){
         this.currentModel.save().then(function(model){
-          if (self.currentUser == model){
+          if (self.currentUser === model){
             self.flashMessages.success("Your password has been changed.");
             Ember.$('#user-change-password-form')[0].reset();
             self.destroySession();
@@ -32,13 +32,13 @@ export default Ember.Route.extend( authorization,{
             Ember.$('#user-change-password-form')[0].reset();
             self.transitionTo('users');
           }
-        }), function(reason){
+        }, function(reason){
           self.currentModel.rollbackAttributes();
           Ember.$('#user-change-password-form')[0].reset();
           reason.errors.forEach(function(error){
             self.flashMessages.danger(Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
           });
-        };
+        });
       }else{
         this.flashMessages.danger("Your password and confirmation password do not match");
       }
@@ -46,6 +46,7 @@ export default Ember.Route.extend( authorization,{
     willTransition: function(){
       Ember.$('#user-change-password-form')[0].reset();
     },
+
     didTransition: function(){
       Ember.run.scheduleOnce('afterRender', this, function() {
         Ember.$('#user-change-password-form')[0].reset();

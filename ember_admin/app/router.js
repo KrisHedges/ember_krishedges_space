@@ -19,6 +19,11 @@ Router.map(function() {
     this.route('edit',{path: "/:category_id/edit"});
     this.route('new', {path: "/new"});
   });
+  this.route('uploads', function() {
+    this.route('index', { path: '/' }, function(){
+      this.route('preview', { path: '/:filename' });
+    });
+  });
   this.route('login');
 });
 

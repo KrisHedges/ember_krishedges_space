@@ -25,6 +25,17 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.apiURL = 'http://localhost:4000/public-api';
+
+    ENV.contentSecurityPolicy = {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-eval'",
+      'font-src': "'self'",
+      'connect-src': "'self' http://localhost:4000 http://localhost:4200",
+      'img-src': " * 'self'",
+      'style-src': "'self' 'unsafe-inline'",
+      'media-src': "'self'"
+    };
   }
 
   if (environment === 'test') {
@@ -40,7 +51,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.apiURL = '/public-api';
   }
 
   return ENV;

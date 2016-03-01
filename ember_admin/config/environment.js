@@ -29,13 +29,14 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.apiURL = 'http://localhost:4000/api';
+    ENV.staticHostURL = 'http://localhost:4000/public/uploads';
 
     ENV.contentSecurityPolicy = {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-eval'",
       'font-src': "'self'",
       'connect-src': "'self' http://localhost:4000 http://localhost:4200",
-      'img-src': " * 'self'",
+      'img-src': " * 'self' data:",
       'style-src': "'self' 'unsafe-inline'",
       'media-src': "'self'"
     };
@@ -45,7 +46,7 @@ module.exports = function(environment) {
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
-
+    ENV.staticHostURL = '/public/uploads';
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;

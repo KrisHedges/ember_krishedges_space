@@ -1,3 +1,4 @@
+/*global $:false */
 import Ember from 'ember';
 import authorization from '../mixins/authorization';
 import config from '../config/environment';
@@ -5,11 +6,11 @@ import config from '../config/environment';
 export default Ember.Route.extend( authorization,{
   beforeModel: function(){
     if (this.canAuthenticate()){
-      this.transitionTo('index')
+      this.transitionTo('index');
     }
   },
 
-  afterModel: function(model, transition) {
+  afterModel: function() {
     Ember.run.scheduleOnce('afterRender', this, function() {
       $("#login-form")[0].reset();
     });

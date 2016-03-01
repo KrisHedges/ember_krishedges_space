@@ -1,3 +1,4 @@
+/* global marked */
 import Ember from 'ember';
 import authorization from '../../mixins/authorization';
 
@@ -16,7 +17,7 @@ export default Ember.Route.extend( authorization,{
     });
   },
 
-  model: function(params) {
+  model: function() {
     var self = this;
     return this.store.findAll('category').then(function(){
       return self.get('currentUser').then( function(user){
@@ -41,14 +42,14 @@ export default Ember.Route.extend( authorization,{
       self.currentModel.set('user', this.get('currentUser'));
       // If no slug is given attempt to set it from title
       if(!this.currentModel.get('slug')){ this.currentModel.set('slug', this.currentModel.get('url_safe_title'));}
-      self.currentModel.save().then(function(model){
+      self.currentModel.save().then(function(){
         self.flashMessages.success("A new post has been Added!");
         self.transitionTo('posts');
-      }), function(reason){
+      }, function(reason){
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
-        })
-      };
+        });
+      });
     },
 
     cancel: function(){

@@ -12,6 +12,7 @@
       <br>
       <label>Publish: </label>{{input type="checkbox" name="published" checked=model.published}}
       <label>URL: </label>{{input type="text" value=model.slug placeholder=model.url_safe_title class="slug"}}
+      <label>Description: </label>{{textarea type="text" value=model.description placeholder="Breif description text used in intros & previews."}}
       <br>
       {{category-select selected_alpha_categories=model.alpha_categories all_categories=all_categories post=model}}
     </div>

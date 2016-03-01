@@ -1,3 +1,4 @@
+/* global $:false */
 import Ember from 'ember';
 import authorization from '../../mixins/authorization';
 
@@ -12,7 +13,7 @@ export default Ember.Route.extend( authorization,{
   },
 
   afterModel: function(model){
-    if((this.get('currentUser').get('id') == model.get('id')) || (this.get('authenticatedRole') == "admin")){
+    if((this.get('currentUser').get('id') === model.get('id')) || (this.get('authenticatedRole') === "admin")){
       return false;
     } else {
       this.transitionTo('users.user', model.get('id'));
@@ -22,7 +23,7 @@ export default Ember.Route.extend( authorization,{
   roles: ["admin","editor","author","visitor"],
 
   isAdmin: function() {
-    return this.get('authenticatedRole') == "admin";
+    return this.get('authenticatedRole') === "admin";
   },
 
   setRole: function(){
@@ -43,18 +44,18 @@ export default Ember.Route.extend( authorization,{
       this.setRole();
       this.currentModel.save().then(function(model){
         self.flashMessages.success(model.get('username').capitalize() + " has been saved!");
-        if (self.currentModel.get('id') == self.get('currentUser').get('id')){
-          if (self.currentModel.get('role') != self.get('authenticatedRole')){
+        if (self.currentModel.get('id') === self.get('currentUser').get('id')){
+          if (self.currentModel.get('role') !== self.get('authenticatedRole')){
             self.destroySession();
           }
         }
         self.transitionTo('users');
-      }), function(reason){
+      }, function(reason){
         self.currentModel.rollbackAttributes();
         reason.errors.forEach(function(error){
           self.flashMessages.danger( Object.keys(error)[0].capitalize() + ":  " + error[ Object.keys(error)[0] ]);
         });
-      };
+      });
     },
 
     selectRole: function() {
