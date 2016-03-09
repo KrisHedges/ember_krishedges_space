@@ -7,10 +7,12 @@
   </div>
   {{file-browser files=uploads store=controller.store}}
   <div class="publishing-info">
-    <div class="hero">
+    <div class="image">
      <label>Primary Image: </label>
       {{input type="text" value=model.image placeholder="Add Image URL"}}
-      <img src={{model.image}} width="200">
+      {{#if model.image}}
+        <img src={{model.image}}>
+      {{/if}}
     </div>
     <div class="description">
       <label>Description: </label>{{textarea type="text" value=model.description placeholder="Breif description text used in intros & previews."}}
