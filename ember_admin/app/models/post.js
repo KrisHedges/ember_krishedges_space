@@ -7,9 +7,11 @@ export default DS.Model.extend({
   slug: DS.attr('string'),
   body: DS.attr('string'),
   description: DS.attr('string'),
+  image: DS.attr('string'),
   published: DS.attr('boolean'),
   published_at: DS.attr('date'),
   inserted_at: DS.attr('date'),
+
   edits: DS.hasMany('edit'),
   categories: DS.hasMany('category', {async: true}),
   user: DS.belongsTo('user', {async: true}),
@@ -33,7 +35,11 @@ export default DS.Model.extend({
 
   last_edit_time: Ember.computed('edits', function(){
     let time = this.get('edits').sortBy('inserted_at').get('lastObject').get('inserted_at');
-    return time ? moment(time).format('MMMM Do YYYY, h:mm:ss A') : false;
+    if (moment(time).isSame(moment(), 'day')){
+      return time ? moment(time).format('MMMM Do YYYY, h:mm:ss A') : false;
+    } else {
+      return time ? moment(time).format('MMMM Do YYYY') : false;
+    }
   }),
 
   last_editor_name: Ember.computed('edits', function(){
@@ -46,6 +52,6 @@ export default DS.Model.extend({
 
   published_date: Ember.computed('published_at', function(){
     let time = this.get('published_at');
-    return time ? moment(time).format('MMMM Do YYYY, h:mm:ss A') : false;
+    return time ? moment(time).format('MMMM Do YYYY') : false;
   })
 });

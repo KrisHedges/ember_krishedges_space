@@ -6,6 +6,7 @@ defmodule KrishedgesSpace.Post do
     field :slug, :string
     field :body, :string
     field :description, :string
+    field :image, :string
     field :published, :boolean, default: false
     field :published_at, Ecto.DateTime
     belongs_to :user, KrishedgesSpace.User
@@ -17,7 +18,7 @@ defmodule KrishedgesSpace.Post do
   end
 
   @required_fields ~w(title body user_id)
-  @optional_fields ~w(published_at published slug description)
+  @optional_fields ~w(published_at published slug description image)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

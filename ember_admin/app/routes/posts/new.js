@@ -1,8 +1,9 @@
 /* global marked */
 import Ember from 'ember';
+import treeify from '../../mixins/treeify';
 import authorization from '../../mixins/authorization';
 
-export default Ember.Route.extend( authorization,{
+export default Ember.Route.extend( authorization, treeify, {
 
   beforeModel: function() {
     this.redirectUnauthenticated("login");
@@ -19,9 +20,11 @@ export default Ember.Route.extend( authorization,{
 
   model: function() {
     var self = this;
-    return this.store.findAll('category').then(function(){
-      return self.get('currentUser').then( function(user){
-         return self.store.createRecord('post', {user: user});
+    return this.store.findAll('upload').then(function(){
+      return self.store.findAll('category').then(function(){
+        return self.get('currentUser').then( function(user){
+           return self.store.createRecord('post', {user: user});
+        });
       });
     });
   },
@@ -30,9 +33,14 @@ export default Ember.Route.extend( authorization,{
     return this.store.peekAll('category');
   },
 
+  uploadTree: function(){
+    return this.store.peekAll('upload');
+  },
+
   setupController: function(controller, model) {
     this._super(controller, model);
     controller.set('all_categories', this.allCategories() );
+    controller.set('uploads', this.treeify(this.uploadTree()) );
   },
 
   actions: {

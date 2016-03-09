@@ -16,6 +16,14 @@ export default DS.Model.extend({
     return ext;
   }),
 
+  isImage: Ember.computed('filname', function(){
+    let filename = this.get('filename');
+    let ext = filename.replace(/.*\./, '');
+    return ['jpg', 'gif', 'png', 'svg', 'tif'].any(function(type){
+      return type === ext;
+    });
+  }),
+
   parent: Ember.computed('id', function(){
     return this.get('id').substr(0, this.get('id').lastIndexOf("/"))
   })

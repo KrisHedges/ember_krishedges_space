@@ -20,9 +20,7 @@ Router.map(function() {
     this.route('new', {path: "/new"});
   });
   this.route('uploads', function() {
-    this.route('index', { path: '/' }, function(){
-      this.route('preview', { path: '/:filename' });
-    });
+    this.route('index', { path: '/' });
   });
   this.route('login');
 });

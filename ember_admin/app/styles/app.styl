@@ -3,7 +3,9 @@
 
 $green = #219331
 $red = #991111
+
 @import "components/category-select"
+@import "components/file-browser"
 
 // Styles
 @keyframes animate-active-arrow
@@ -20,105 +22,60 @@ $red = #991111
   100%
     width 24px
 
-file-extension-icons()
-  a
-    &:before
-      font-family 'icomoon'
-  &.regular
-    & > a
-      &:hover
-        text-decoration none
-      &:before
-        content ' j '
-  &.jpg,
-  &.gif,
-  &.svg,
-  &.png
-    a
-      &:before
-        content ' # '
-  &.pdf
-    a
-      &:before
-        content ' ` '
-  &.doc
-  &.dot
-  &.docx
-  &.docm
-  &.dotx
-  &.dotm
-  &.docb
-    a
-      &:before
-        content ' ~ '
-  &.xls,
-  &.xlt,
-  &.xlm,
-  &.xlsx,
-  &.xlsm,
-  &.xltx,
-  &.xltm,
-  &.xlsb,
-  &.xla,
-  &.xlam,
-  &.xll,
-  &.xlw
-    a
-      &:before
-        content ' ! '
-  &.ppt,
-  &.pot,
-  &.pps,
-  &.pptx,
-  &.pptm,
-  &.potx,
-  &.potm,
-  &.ppam,
-  &.ppsx,
-  &.ppsm,
-  &.sldx,
-  &.sldm
-    a
-      &:before
-        content ' @ '
-  &.zip,
-  &.rar,
-  &.gz,
-  &.bz,
-  &.bz2,
-  &.tar,
-  &.tgz
-    a
-      &:before
-        content ' $ '
-  &.aac,
-  &.aif,
-  &.aiff,
-  &.flac,
-  &.gsm,
-  &.m4a,
-  &.m4b,
-  &.m4,
-  &.mm,
-  &.mp3,
-  &.mpc,
-  &.ms,
-  &.ogg,
-  &.oga,
-  &.raw,
-  &.vox,
-  &.wav,
-  &.wma,
-  &.wv,
-  &.ra,
-  &.rm,
-  &.webm
-    a
-      &:before
-        content ' % '
+.dots
+  display inline-block
+  position relative
+  top 2px
+  line-height 30px
+  margin-left 0.25em
+  animation thinking-dots
+  animation-duration 600ms
+  animation-iteration-count infinite
+  animation-timing-function linear
+  overflow hidden
+  &:after
+    content '...'
+    display inline-block
 
+button()
+  float right
+  background linear-gradient(to top, 0% #eee, 100% #ededed)
+  color #666
+  border 1px solid #bbb
+  outline none
+  margin 0.25em 0.4em 0.25em 0em
+  padding 0.5em 0.7em
+  font-weight 100
+  font-size 1em
+  border-radius 3px
+  text-decoration none
+  transition all 60ms ease-out
+  &.active,
+  &:active,
+  &:hover
+    background #444
+    color #efefef
+    border 1px solid #3f3f3f
+  &.negative
+    &:active
+    &:hover
+      background $red
+      border 1px solid darken($red, 10%)
+  &.positive
+    &:active
+    &:hover
+      background $green
+      border 1px solid darken($green, 10%)
+button,
+.button
+  button()
 
-
+.add
+  button()
+  float left
+  margin 1em 0.75em 1.8em 0
+  &:before
+    content ' + '
 
 input, textarea, select
   border 1px solid #ccc
@@ -137,13 +94,6 @@ input[type="password"],
   height auto
   margin 1em 3.5%
   padding 1em
-  &.slug
-    float left
-    display block
-    width 49%
-    height auto
-    margin 0.25em 1em 0.25em 0
-    padding 0.25em
 
 fieldset
   display block
@@ -167,47 +117,6 @@ label
   float left
   margin 0.5em 0.5em 0.5em 0em
 
-textarea
-  width 90%
-  display block
-  min-height 200px
-  height 100%
-  margin 1em 3.5%
-  padding 1em
-
-button()
-  float right
-  background linear-gradient(to top, 0% #eee, 100% #ededed)
-  color #666
-  border 1px solid #bbb
-  outline none
-  margin 0.25em 0.4em 0.25em 0em
-  padding 0.5em 0.7em
-  font-weight 100
-  font-size 1em
-  border-radius 3px
-  text-decoration none
-  transition all 60ms ease-out
-  &:active
-  &:hover
-    background #444
-    color #efefef
-    border 1px solid #3f3f3f
-  &.negative
-    &:active
-    &:hover
-      background $red
-      border 1px solid darken($red, 10%)
-  &.positive
-    &:active
-    &:hover
-      background $green
-      border 1px solid darken($green, 10%)
-button,
-.button
-  button()
-
-
 table
   width 96%
   margin 1em auto 0 auto
@@ -230,6 +139,10 @@ table
 
 h1, h2, h3, h4, h5, h6
   margin 1em 1em 0.5em 0em
+
+
+
+
 
 img[alt~="large"]
   max-width 90%
@@ -265,26 +178,6 @@ img[alt~="center"]
   display block
   margin 1em auto 1em auto
 
-.add
-  button()
-  float left
-  margin 1em 0.75em 1.8em 0
-  &:before
-    content ' + '
-
-.dots
-  display inline-block
-  position relative
-  top 2px
-  margin-left 0.25em
-  animation thinking-dots
-  animation-duration 600ms
-  animation-iteration-count infinite
-  animation-timing-function linear
-  overflow hidden
-  &:after
-    content '...'
-    display inline-block
 
 // Layout "The Pig"
 body, html
@@ -359,24 +252,19 @@ aside
     position absolute
     top 0px
     left 0px
+    padding 0 1em
     z-index 20
   .post-editor
-    grid-unit(33%)
+    grid-unit(100%)
     height 100%
-    .publishing-info
-      grid-unit(94%)
-      margin 0 3%
-      position absolute
-      box-sizing border-box
-      padding 4%
-      height auto
+    .editor
+      grid-unit(33%)
+      height 100%
   .post-edit-preview
     grid-unit(67%)
     height 100%
     box-sizing border-box
     padding 36px 4%
-
-
 
 // The Proverbial Lipstick
 aside
@@ -444,58 +332,113 @@ aside
           &:after
             display none
 
+.post-edit-form
+  .publishing-info,
+  .file-browser
+    grid-unit(100%)
+    transition all 300ms linear
+    margin-top -100%
+    padding 0 0 2em 0
+    visibility hidden
+  &.file-browser-visible
+    .publishing-info
+      margin-top -100%
+    .file-browser
+      margin-top 60px
+      visibility visible
+  &.publishing-info-visible
+    .file-browser
+      margin-top -100%
+    .publishing-info
+      padding 0
+      margin-top 60px
+      visibility visible
+  .publishing-info
+    font-size 0.8em
+    margin-bottom 2em
+    input
+      width 75%
+      padding 0 0.75em
+      margin 0
+      height 30px
+      line-height 30px
+      border none
+      border-bottom 1px solid #666
+      background #efefef
+    label
+      padding 0 0.25em 0 0
+      margin 0 0.5em 0 0
+      height 30px
+      line-height 30px
+      clear left
+    textarea
+      display inline-block
+      width 85% !important
+      min-height 70px !important
+      height 70px !important
+      margin 0.5em 5% !important
+      padding 1em !important
+    p
+      grid-unit(60%)
+      padding 0 0.25em 0 0
+      margin 0 0.5em 0 0
+      min-height 30px
+      line-height 30px
+    .image
+      grid-unit(28%)
+      box-sizing border-box
+      padding 1em 1% 0 2%
+      img
+        width 75%
+        margin 1em 0
+        border 30px solid #efefef
+        background #efefef
+        height auto
+    .description
+      grid-unit(23%)
+      box-sizing border-box
+      padding 1em 2% 0 0%
+    .category-list
+      grid-unit(20%)
+      box-sizing border-box
+      padding 1em 1% 0 2%
+    .meta
+      grid-unit(27%)
+      box-sizing border-box
+      padding 1em 1% 0 3%
+
+
 .post-toolbar
   background #efefef
   border-bottom 1px solid #9a9a9a
   button
     button()
     float right
+  .show-files
   .show-publishing
     float left
-    margin 0.2em 1em
-
-
-.post-editor
-  border-top 2.9em solid #2d2d2d
-  .publishing-info
-    background #252525
-    color white
-    font-weight 100
-    opacity 0.99
-    top 0
-    left 0px
-    font-size 0.9em
-    transform translateY(-100%)
-    transition all 200ms linear
-    box-shadow 0px 0px 2px #222
-    border-radius 0 0 1em 1em
-    opacity 0.99
-    p
-      margin 0 0 0.75em 0
-    strong,
-    h4,
-    label
-      font-weight 400
-    input
-      color #333
-    &.visible
-      transform translateY(0%)
+    margin 0.2em 0.25em
 
 .post-editor
+  border-top 1px solid #9a9a9a
+  .editor
+    background #2d2d2d
+    border-top 44px solid #2d2d2d
   textarea
     width 100%
     min-height 400px
     height 100%
     margin 0
-    padding 2em 4% 4em 4%
+    padding 3em 4% 4em 4%
     box-sizing border-box
     resize none
-    border 0
     background #2d2d2d
     color #ccc
-
+    border 0
+    border-bottom 44px solid #2d2d2d
 .post-edit-preview
-  border-top 36px solid #efefef
+  border-top 44px solid #fff
+  box-sizing border-box
   & > h1
     margin 0
     & input
@@ -506,252 +449,6 @@ aside
       border-bottom 1px dashed #eee
       &:required:invalid
         border-bottom 1px solid #9a9a9a
-
-.files
-  grid-unit(55%)
-  margin-top 1em
-  margin-right 5%
-  overflow-y scroll
-  font-size 1.1em
-  line-height 1.2em
-  & .add-directory
-    position relative;
-    margin 0;
-    padding 0;
-    box-sizing border-box;
-    height 30px;
-    line-height 30px
-    letter-spacing 3px
-    display inline
-    background none
-    border none
-    font-size 0.8em
-    font-family 'icomoon'
-    z-index 2
-    color #666
-    background #cfcfcf
-    width 14%
-    &:hover
-      color #efefef
-      background #666
-  .ember-text-field
-    width 82%
-    margin-left 16px
-    margin-bottom 0.5em
-    padding 0.25em
-    height 30px
-    box-sizing border-box
-  button
-    font-size 9px
-  .help-text
-    display block
-    font-size 0.7em
-    margin 0.5em 1em
-    margin-left 16px
-    color #666
-  .dropzone
-    display block
-    position absolute
-    box-sizing border-box
-    width 100%
-    height 30px
-    min-height 30px
-    background none
-    margin 0
-    padding 0
-    border 0px
-    z-index 1
-    .dz-message
-      display block
-      line-height 30px
-      margin 0
-      padding 0
-      color #fff
-    &.dz-drag-hover
-      background-color rgba(#efefef, 60%)
-      cursor default
-      .dz-message
-        color #666
-  & > .dropzone
-    position relative
-    &:before
-      float left
-      font-family 'icomoon'
-      font-size 1.2em
-      line-height 30px
-      color #666
-      content '\0000a0 s p '
-    .dz-message
-      &:after
-        display inline
-        float left
-        color #666
-        content '\0000a0\0000a0\0000a0/public/uploads'
-  ul
-    margin 0
-  li
-    position relative
-    clear both
-    list-style none
-    height 34px
-    min-height 34px
-    border 0px
-    line-height 34px
-    white-space nowrap
-    border-bottom 1px solid #efefef
-    &:focus
-      background-color #efefef
-    ul
-      margin 0
-      padding 0 0 0 1.7em
-      li
-        margin 0
-        padding 0 0 0 0.20em
-    a
-      position relative
-      color #666
-      text-decoration none
-      &:hover
-        text-decoration underline
-      &:before
-          display block
-          float left
-          margin 0 0.75em 0 0
-          font-family 'icomoon'
-          font-size 1.2em
-          top 30px
-    & .remove-file
-      position relative
-      margin 0.1em 1em 0 0
-      padding 0
-      height 30px
-      line-height 30px
-      display inline
-      background none
-      border none
-      font-size 1em
-      font-family 'icomoon'
-      z-index 2
-      color #cfcfcf
-      &:hover
-        color #666
-    & > ul
-      display none
-    &.visible
-      & > ul
-        display block
-    &.directory
-      & > a
-        &:hover
-          text-decoration none
-        &:before
-          position relative
-          display inline
-          margin 0
-          font-family 'icomoon'
-          font-size 1.2em
-          top 0px
-          content 'g o\0000a0'
-          z-index 2
-      &.visible
-        & > a
-          &:before
-            content 's p\0000a0'
-    file-extension-icons()
-
-.dz-filename
-  grid-unit(60%)
-  color #666
-.dz-progress
-  grid-unit(100%)
-  margin 0
-  padding 0
-.dz-upload
-  display block
-  width 0%
-  height 4px
-  margin 0
-  padding 0
-  background-color #cfcfcf
-.dz-remove
-  display block
-  float right
-  height 30px
-  line-height 30px
-  width auto
-  margin 0.2em 0.5em 0 0
-  font-family 'icomoon'
-  cursor pointer
-  text-decoration none !important
-  color #cfcfcf !important
-  &:hover
-    color #666 !important
-.dz-drag-hover
-  .dz-message
-    &:before
-      display inline-block
-      font-family 'icomoon'
-      font-size 1.2em
-      color #666
-      content 'v'
-      transform scaleX(-1)
-      margin 0em 0.5em 0 0
-
-.preview
-  grid-unit(38%)
-  margin-right 2%
-  margin-top 1em
-  .viewer
-    position relative
-    width 100%
-    height 40%
-    min-height 300px
-    background #efefef
-    div
-      position absolute
-      width 100%
-      height 73%
-      a
-        display block
-        width 100%
-        height auto
-        font-size 200px
-        color #666
-        text-align center
-        text-decoration none
-        cursor default
-        margin-top 35px
-      file-extension-icons()
-    img
-      position absolute
-      width auto
-      height auto
-      max-width 90%
-      max-height 90%
-      margin 0 auto
-      top 50%
-      left 50%
-      transform translate(-50%, -50%)
-  .info
-    .path
-    .name
-      display block
-      width 96%
-      text-align center
-    .name
-      font-size 1.2em
-      margin 1em
-    .path
-      font-size 1em
-      background #efefef
-      padding 2%
-      cursor text
-      overflow scrollable
-
-// Desktop Breakpoints
-@media screen and (max-width: 1330px)
-  body, html
-    font-size 14px
 
 @media screen and (max-width: 1200px)
   body, html

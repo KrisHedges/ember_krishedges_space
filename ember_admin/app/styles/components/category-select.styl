@@ -5,21 +5,20 @@
     opacity 100%
 
 .category-list
-  grid-unit(100%)
   padding 0
   margin-bottom 1em
-  -webkit-overflow-scrolling touch
-  -webkit-user-select none
-  -moz-user-select none
-  -ms-user-select none
   user-select none
   h5
+    clear both
     margin 0.5em 0
     font-weight 400
     color #666
   hr
+    margin 1em
     border 1px dashed #666
   span
+    float left
+    clear both
     cursor pointer
     animation category-fade-in
     animation-duration 60ms
@@ -28,25 +27,17 @@
     transition all 60ms linear
     font-weight normal
     letter-spacing 0.025em
+    &:hover
+      text-decoration underline
   .selected
     display inline-block
-    span
-      background #dedede
-      color #333
-      border 1px solid #cecece
-      border-radius 3px
-      float left
-      display inline-block
-      margin 0 0.25em 0.5em 0.25em
-      padding 0.30em 0.40em 0.40em 0.48em
-      &:hover
-        color $red
+    width 100%
+    column-count 2
+    color #000
   .available
     display inline-block
+    width 100%
     column-count 2
-    max-height 150px
-    overflow-y scroll
-    span
-      &:hover
-        color $green
+    color #666
+
 

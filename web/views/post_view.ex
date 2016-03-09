@@ -15,6 +15,7 @@ defmodule KrishedgesSpace.PostView do
       slug: post.slug,
       body: post.body,
       description: post.description,
+      image: post.image,
       published: post.published,
       published_at: post.published_at,
       inserted_at: post.inserted_at,
