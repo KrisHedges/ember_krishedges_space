@@ -34,5 +34,6 @@ defmodule KrishedgesSpace.Router do
     get "/", StaticController, :public
     get "/admin", StaticController, :admin
     get "/admin/*path", StaticController, :admin
+    get "/*path", StaticController, :public
   end
 end
