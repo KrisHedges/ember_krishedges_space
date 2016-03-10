@@ -46,7 +46,7 @@ module.exports = function(environment) {
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
-    ENV.staticHostURL = '/public/uploads';
+    ENV.staticHostURL = 'http://localhost:4000/public/uploads';
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
@@ -56,6 +56,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.apiURL = '/api';
+    ENV.staticHostURL = '/public/uploads';
   }
 
   return ENV;
