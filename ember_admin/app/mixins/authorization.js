@@ -64,12 +64,12 @@ export default Ember.Mixin.create({
   },
 
   setCookie: function(key, value) {
-      document.cookie = key + '=' + value + ';expires=' + moment().add(24, 'hours').utc().format();
+    document.cookie = key + '=' + value + ';expires=' + moment().add(24, 'hours').utc().format();
   },
 
   getCookie: function(key) {
-      var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
-      return keyValue ? keyValue[2] : null;
+    let keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    return keyValue ? keyValue[2] : null;
   },
 
   actions:{

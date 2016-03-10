@@ -84,6 +84,7 @@ export default Ember.Component.extend( treeify, authorization, {
     controller.set('uploadComplete', this.get('uploadComplete') );
     controller.set('selectedFile', false);
     controller.set('pathToCreate', '');
+    controller.set('copiedToClipboard', this.copiedToClipboard);
   },
 
   actions: {
@@ -99,8 +100,7 @@ export default Ember.Component.extend( treeify, authorization, {
       this.createDirectory(path);
     },
 
-
-    successfulCopy: function(){
+    copiedToClipboard: function(){
       this.flashMessages.success("Copied Url to clipboard.");
     },
 

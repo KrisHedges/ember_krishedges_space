@@ -12,8 +12,8 @@ export default DS.Model.extend({
   published_at: DS.attr('date'),
   inserted_at: DS.attr('date'),
 
-  edits: DS.hasMany('edit'),
-  categories: DS.hasMany('category', {async: true}),
+  edits: DS.hasMany('edit', {async: true}),
+  categories: DS.hasMany('category'),
   user: DS.belongsTo('user', {async: true}),
 
   author_name: Ember.computed.alias('user.username'),

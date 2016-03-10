@@ -9,7 +9,7 @@ export default DS.Model.extend({
   posts: DS.hasMany('post'),
 
   post_count: Ember.computed('posts', function(){
-    return this.get('posts').length;
+    return this.get('posts').get('length');
   }),
 
   created: Ember.computed('inserted_at', function(){

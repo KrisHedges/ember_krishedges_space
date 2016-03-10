@@ -41,6 +41,7 @@ export default Ember.Route.extend( authorization, treeify, {
     this._super(controller, model);
     controller.set('all_categories', this.allCategories() );
     controller.set('uploads', this.treeify(this.uploadTree()) );
+    controller.set('store', this.store );
   },
 
   actions: {

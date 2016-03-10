@@ -25,7 +25,7 @@ export default DS.Model.extend({
   }),
 
   parent: Ember.computed('id', function(){
-    return this.get('id').substr(0, this.get('id').lastIndexOf("/"))
+    return this.get('id').substr(0, this.get('id').lastIndexOf("/"));
   })
 
 });

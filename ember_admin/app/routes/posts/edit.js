@@ -1,4 +1,5 @@
 /* global marked */
+/* global $:false */
 import Ember from 'ember';
 import treeify from '../../mixins/treeify';
 import authorization from '../../mixins/authorization';
@@ -6,7 +7,6 @@ import authorization from '../../mixins/authorization';
 export default Ember.Route.extend( authorization, treeify, {
 
   beforeModel: function() {
-    this.redirectUnauthenticated("login");
     marked.setOptions({
       gfm: true,
       tables: true,
@@ -16,6 +16,7 @@ export default Ember.Route.extend( authorization, treeify, {
       smartLists: true,
       smartypants: true,
     });
+    this.redirectUnauthenticated("login");
   },
 
   model: function(params) {
@@ -39,6 +40,7 @@ export default Ember.Route.extend( authorization, treeify, {
     this._super(controller, model);
     controller.set('all_categories', this.allCategories() );
     controller.set('uploads', this.treeify(this.uploadTree()) );
+    controller.set('store', this.store );
   },
 
   actions: {

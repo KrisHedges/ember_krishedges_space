@@ -2,7 +2,8 @@
 import Ember from 'ember';
 import authorization from '../mixins/authorization';
 
-export default Ember.Route.extend(authorization, {
+export default Ember.Route.extend( authorization, {
+
   beforeModel: function() {
     this.redirectUnauthenticated("login");
   },
@@ -42,7 +43,9 @@ export default Ember.Route.extend(authorization, {
 
     deletePost: function(post){
       if (confirm("Are you sure you want to delete this Post?")) {
-        post.destroyRecord().then(function(){this.transitionTo('posts')}.bind(this))
+        post.destroyRecord().then(function(){
+          this.transitionTo('posts');
+        }.bind(this));
       }
     }
   }

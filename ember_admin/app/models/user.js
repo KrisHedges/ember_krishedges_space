@@ -9,10 +9,10 @@ export default DS.Model.extend({
   confirm: "",
   inserted_at: DS.attr('string'),
   role: DS.attr('string'),
-  posts: DS.hasMany('post'),
+  posts: DS.hasMany('post', {async: true}),
 
   post_count: Ember.computed('posts', function(){
-    return this.get('posts').length;
+    return this.get('posts').get('length');
   }),
 
   created: Ember.computed('inserted_at', function(){
