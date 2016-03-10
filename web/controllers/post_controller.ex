@@ -33,7 +33,7 @@ defmodule KrishedgesSpace.PostController do
     case Repo.insert(changeset) do
       {:ok, post} ->
         # Build our many-to-many Category joins
-        new_category_ids = Map.get(post_params, "categories_id")
+        new_category_ids = Map.get(post_params, "categories")
 
         # Crete the new Category Join Models
         Enum.map new_category_ids, fn(cat_id) ->
@@ -69,7 +69,7 @@ defmodule KrishedgesSpace.PostController do
     changeset = Post.changeset(post, post_params) |> Ecto.Changeset.put_embed(:edits, post.edits ++ [edit])
 
     # Build our many-to-many Category joins
-    new_category_ids = Map.get(post_params, "categories_id")
+    new_category_ids = Map.get(post_params, "categories")
     category_ids = Enum.map(post.categories, fn(c) -> to_string(c.id) end)
 
     if category_ids != new_category_ids do

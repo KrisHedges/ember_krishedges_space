@@ -8,12 +8,12 @@ defmodule KrishedgesSpace.UserController do
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # when not action in [:index, :create]
 
   def index(conn, _params, current_user, claims) do
-    users = Repo.all(User)
+    users = Repo.all(User) |> Repo.preload(:posts)
     render(conn, "index.json", users: users)
   end
 
   def show(conn, %{"id" => id}, current_user, claims) do
-    user = Repo.get!(User, id)
+    user = Repo.get!(User, id) |> Repo.preload(:posts)
     render(conn, "show.json", user: user)
   end
 

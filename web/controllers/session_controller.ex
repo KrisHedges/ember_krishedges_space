@@ -2,7 +2,7 @@ defmodule KrishedgesSpace.SessionController do
   use KrishedgesSpace.Web, :controller
 
   def create(conn, %{"user" => %{"password" => pass, "username" => username}}) do
-    user = Repo.get_by(KrishedgesSpace.User, username: username)
+    user = Repo.get_by(KrishedgesSpace.User, username: username) |> Repo.preload(:posts)
     if user do
       case KrishedgesSpace.Auth.login_by_username_and_pass(conn, user, pass) do
         {:ok, jwt, _claims} ->

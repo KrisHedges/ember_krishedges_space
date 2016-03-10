@@ -22,7 +22,8 @@ defmodule KrishedgesSpace.UserView do
       email: user.email,
       role: user.role,
       inserted_at: user.inserted_at,
-      password: ''
+      password: '',
+      posts: Enum.map(user.posts, fn(c) -> c.id end)
     }
   end
 
