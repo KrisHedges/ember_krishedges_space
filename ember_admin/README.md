@@ -1,7 +1,3 @@
-# TODO
-- add categories CRUD
-- category selection to post
-
 # Ember-admin
 
 This README outlines the details of collaborating on this Ember application.
