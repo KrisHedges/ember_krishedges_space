@@ -4,10 +4,12 @@ export default Ember.Mixin.create({
   treeify: function(list) {
       var treeList = [];
       var lookup = {};
+
       list.forEach(function(obj) {
         lookup[obj.get('id')] = obj;
         Ember.set(obj, 'children', []);
       });
+
       list.forEach(function(obj) {
         if (obj.get('parent') !== "") {
           lookup[obj.get('parent')]['children'].push(obj);
@@ -15,6 +17,7 @@ export default Ember.Mixin.create({
           treeList.push(obj);
         }
       });
+
       return treeList;
   },
 
