@@ -2,7 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(params){
-    let post = this.store.peekAll('post').filterBy('slug', params.slug).get('firstObject');
-    return this.store.find('post', post.id);
+    return this.store.findAll("category").then(function(){
+      return this.store.findAll('post').then( function(posts){
+        let post = posts.filterBy('slug', params.slug).get('firstObject');
+        return post;
+      }.bind(this));
+    }.bind(this));
   }
 });

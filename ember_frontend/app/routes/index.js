@@ -2,24 +2,23 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(){
-    let self = this;
     return this.store.findAll("category").then(function(){
-      return self.store.findAll("post");
-    });
+      return this.store.findAll("post");
+    }.bind(this));
   },
 
   latest_music: function(){
-    let post = this.store.peekAll("category").findBy("name", "The Auditory").get("posts").sortBy('published_at').reverse();
+    let post = this.store.peekAll("category").findBy("name", "The Auditory Cortex").get("posts").sortBy('published_at').reverse();
     return post[0];
   },
 
   latest_web: function(){
-    let post = this.store.peekAll("category").findBy("name", "The Web").get("posts").sortBy('published_at').reverse();
+    let post = this.store.peekAll("category").findBy("name", "The Cerebral Cortex").get("posts").sortBy('published_at').reverse();
     return post[0];
   },
 
   latest_art: function(){
-    let post = this.store.peekAll("category").findBy("name", "The Visual").get("posts").sortBy('published_at').reverse();
+    let post = this.store.peekAll("category").findBy("name", "The Visual Cortex").get("posts").sortBy('published_at').reverse();
     return post[0];
   },
 

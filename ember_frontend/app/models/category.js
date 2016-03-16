@@ -1,4 +1,6 @@
+/* global Ember */
 import DS from 'ember-data';
+import moment from 'moment';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
@@ -16,7 +18,7 @@ export default DS.Model.extend({
   }),
 
   short_description: Ember.computed('description', function(){
-    return this.get('description').substring(0,40)
+    return this.get('description').substring(0,40);
   })
 
 });

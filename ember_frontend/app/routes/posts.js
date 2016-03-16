@@ -7,7 +7,7 @@ export default Ember.Route.extend({
       return self.store.findAll('post').then(function(posts){
         return posts.filter(function(post){
           return post.get('categories').any(function(cat){
-            return cat.get('name') != "Pages";
+            return cat.get('name') !== "Pages";
           });
         }).sortBy('published_at').reverse();
       });

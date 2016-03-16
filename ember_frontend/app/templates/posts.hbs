@@ -1,6 +1,12 @@
-{{render 'header'}}
-<section>
-  {{#each model as |post|}}
-   <p>{{#link-to 'show' post.slug}}{{post.title}} - {{post.published_date}}{{/link-to}}</p>
-  {{/each}}
+<section class="posts">
+  <h5>All the Ramblings On My Favorite Pursuits</h5>
+  <ul>
+    {{#each model as |post|}}
+     <li>
+       <h3>{{#link-to 'show' post.slug}}{{post.title}}{{/link-to}}</h3>
+       <h6>{{post.published_date}}</h6>
+       <p>{{post.description}}</p>
+     </li>
+    {{/each}}
+  </ul>
 </section>

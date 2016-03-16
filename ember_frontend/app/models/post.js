@@ -1,3 +1,4 @@
+/* global Ember */
 import DS from 'ember-data';
 import moment from 'moment';
 
@@ -16,7 +17,7 @@ export default DS.Model.extend({
   }),
 
   url_safe_title: Ember.computed('title', function(){
-    let title = this.get('title')
+    let title = this.get('title');
     if(title){
       return title.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
     } else {
@@ -27,6 +28,39 @@ export default DS.Model.extend({
   published_date: Ember.computed('published_at', function(){
     let time = this.get('published_at');
     return time ? moment(time).format('MMMM Do YYYY') : false;
+  }),
+
+  category_names: Ember.computed('categories', function(){
+    let cats = this.get('categories')
+    if(cats.get('length')< 1){
+      return "No Catgeories Assigned";
+    }
+    if(cats.get('length') === 1){
+      return cats.get('firstObject').get('name');
+    }
+    if(cats.get('length')> 1){
+      let names = cats.map(function(cat){
+        return cat.get('name');
+      });
+      return names.join(", ");
+    }
+  }),
+
+  category_descriptions: Ember.computed('categories', function(){
+    let cats = this.get('categories')
+    if(cats.get('length')< 1){
+      return "No Catgeories Assigned";
+    }
+    if(cats.get('length') === 1){
+      return cats.get('firstObject').get('description');
+    }
+    if(cats.get('length')> 1){
+      let names = cats.map(function(cat){
+        return cat.get('description');
+      });
+      return names.join(" & ");
+    }
   })
+
 });
 

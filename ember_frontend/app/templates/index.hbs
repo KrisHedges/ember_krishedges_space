@@ -1,11 +1,45 @@
-{{render 'header'}}
-<section>
-<dl>
-  <dt>{{#link-to 'show' latest_music_post.slug}}{{ latest_music_post.title }}{{/link-to}}</dt>
-  <dd>{{ latest_music_post.published_date }}</dd>
-  <dt>{{#link-to 'show' latest_art_post.slug}}{{ latest_art_post.title }}{{/link-to}}</dt>
-  <dd>{{ latest_art_post.published_date }}</dd>
-  <dt>{{#link-to 'show' latest_web_post.slug}}{{ latest_web_post.title }}{{/link-to}}</dt>
-  <dd>{{ latest_web_post.published_date }}</dd>
-</dl>
+<section class="latest-by-category">
+  <h5>Latest Ramblings On My Favorite Pursuits</h5>
+  <dl>
+    <dt>
+      <span class="category-definition cerebral">
+        {{partial 'brain'}}
+        <h5>{{latest_web_post.category_names}}</h5>
+        <p>{{latest_web_post.category_descriptions}}</p>
+      </span>
+      <h3>{{#link-to 'show' latest_web_post.slug}}{{ latest_web_post.title }}{{/link-to}}</h3>
+    </dt>
+    <dd>
+      <h6>{{ latest_web_post.published_date }}</h6>
+      <p>{{latest_web_post.description}}</p>
+    </dd>
+  </dl>
+  <dl>
+    <dt>
+      <span class="category-definition visual">
+        {{partial 'brain'}}
+        <h5>{{latest_art_post.category_names}}</h5>
+        <p>{{latest_art_post.category_descriptions}}</p>
+      </span>
+      <h3>{{#link-to 'show' latest_art_post.slug}}{{ latest_art_post.title }}{{/link-to}}</h3>
+    </dt>
+    <dd>
+      <h6>{{ latest_art_post.published_date }}</h6>
+      <p>{{latest_art_post.description}}</p>
+    </dd>
+  </dl>
+  <dl>
+    <dt>
+      <span class="category-definition auditory">
+        {{partial 'brain'}}
+        <h5>{{latest_music_post.category_names}}</h5>
+        <p>{{latest_music_post.category_descriptions}}</p>
+      </span>
+      <h3>{{#link-to 'show' latest_music_post.slug}}{{ latest_music_post.title }}{{/link-to}}</h3>
+    </dt>
+    <dd>
+      <h6>{{ latest_music_post.published_date }}</h6>
+      <p>{{latest_music_post.description}}</p>
+    </dd>
+  </dl>
 </section>
