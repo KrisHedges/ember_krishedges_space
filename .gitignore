@@ -4,6 +4,9 @@
 /deps
 /*.ez
 
+# Store files on Mac
+.DS_Store
+
 # Generate on crash by the VM
 erl_crash.dump
 
