@@ -1,0 +1,26 @@
+body
+  header
+    padding 7em 2em 4em 2em
+    background linear-gradient(top left to bottom right, 0% $orange, 20% $orange, 40% $green, 70% $purple, 100% $deep-purple)
+    color $white
+    text-align center
+    user-select none
+    h1, h4, h2
+      position relative
+      z-index 2
+      color $white
+      transform translateZ(0)
+    video
+      position absolute
+      width 100%
+      min-height 100%
+      bottom 0
+      left 0
+      z-index 0
+      opacity 0.4
+      background-image url('/gridtile.png');
+      background-size 100% 100%
+    @media only screen and (max-width: 691px)
+      video
+        min-width 325%
+        min-height 100%

@@ -31,7 +31,7 @@ export default DS.Model.extend({
   }),
 
   category_names: Ember.computed('categories', function(){
-    let cats = this.get('categories')
+    let cats = this.get('categories');
     if(cats.get('length')< 1){
       return "No Catgeories Assigned";
     }
@@ -47,7 +47,7 @@ export default DS.Model.extend({
   }),
 
   category_descriptions: Ember.computed('categories', function(){
-    let cats = this.get('categories')
+    let cats = this.get('categories');
     if(cats.get('length')< 1){
       return "No Catgeories Assigned";
     }

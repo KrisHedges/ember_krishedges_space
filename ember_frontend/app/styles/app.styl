@@ -1,5 +1,6 @@
 @css {
-  @import url(https://fonts.googleapis.com/css?family=Advent+Pro|Martel);
+  @import url(https://fonts.googleapis.com/css?family=Rajdhani|Martel);
+
   @font-face {
     font-family: "socicon";
     src:url("fonts/socicon.eot");
@@ -13,101 +14,21 @@
 }
 
 @import "super-minimal/super-minimal"
-$white = #efefef
-$black = #2d2d2d
-$deep-black = #202020
-$purple = #773b77
-$deep-purple = #180c18
-$green = #3eb766 //lighten(desaturate(#00B23B, 50%),20%)
-$orange = #FF9A00
-
-
-pre
-  overflow visible
-
-img[alt~="large"]
-  max-width 90%
-  min-width 600px
-  height auto
-
-img[alt~="medium"]
-  max-width 65%
-  min-width 450px
-  height auto
-
-img[alt~="small"]
-  max-width 45%
-  min-width 300px
-  height auto
-
-img[alt~="tiny"]
-  max-width 30%
-  min-width 150px
-  height auto
-
-img[alt~="left"]
-  display block
-  float left
-  margin 1em 1em 1em 0.5em
-
-img[alt~="right"]
-  display block
-  float right
-  margin 1em 0.5em 1em 1em
-
-img[alt~="center"]
-  display block
-  margin 1em auto 1em auto
-
-h1,h2,h3,h4,h5,h6
-  font-family "Advent Pro"
-h1
-  font-size 3.4em
-  margin 0 0 0.2em 0
-  color $purple
-h2
-  font-size 2.7em
-  margin 0 0 0.3em 0
-  color $purple
-h3
-  font-size 2.4em
-  margin 0 0 0.5em 0
-  color $purple
-h4
-  font-size 2em
-  margin 0 0 0.6em 0
-h5
-  font-size 1.5em
-  margin 0 0 0.5em 0
-  color $green
-h6
-  font-size 1.1em
-  font-weight 200
-  margin -0.5em 0 0.8em 0
-  color $green
-
-a
-  display inline
-  text-decoration none
-  color $purple
-  transition all 300ms linear
-  &:hover
-    color $green
+@import "colors"
+@import "images"
+@import "typo"
 
 // Layout "The Pig"
-body, html
-  grid-unit(100%)
+html
+  width 100%
   height 100%
-  font-family "Martel"
-  overflow-y scroll
-  -webkit-overflow-scrolling touch
-  font-size 15px
-  min-width 320px
-  margin 0
-  padding 0
-  top 0
-  text-rendering optimizeLegibility
-  font-smoothing antialiased
+  overflow hidden
+
+body
+  position relative
+  width 100%
+  height 100%
+  overflow hidden
   & > .ember-view
     margin 0
     padding 0
@@ -117,279 +38,135 @@ body, html
       content ' '
       clear both
       display table
-    & > .ember-view
-      margin 0
-      padding 0
-      top 0
-      &:after
-        content ' '
-        clear both
-        display table
-
-
-header
-  grid-unit(100%)
-  display block
-  height 30%
-  background linear-gradient(top left to bottom right, 0% $orange, 20% $orange, 40% $green, 70% $purple, 100% $deep-purple)
-  color $white
-  text-align center
-  padding 7em 2em 4em 2em
-  transform translate3d(0,0,0)
-  overflow hidden
-  h1, h4, h2
-    position relative
-    z-index 2
-    color $white
-    text-shadow 0px 1px 1px $black
-  video
-    position absolute
-    width 100%
-    min-height 100%
-    bottom 0
-    left 0
-    z-index 1
-    opacity 0.4
-    background-image url('/gridtile.png');
-    background-size 100% 100%
-    transform translate3d(0,0,0)
-  @media only screen and (max-width: 691px)
-    video
-      min-width 325%
-      min-height 100%
-
-footer
-  grid-unit(100%)
-  position relative
-  z-index 2
-  border-top 1px solid $deep-black
-  background linear-gradient(from bottom right to top left, 100% $deep-purple, 0% darken($purple, 30%))
-  z-index 0
-  color $white
-  overflow hidden
-  &:before
-    position absolute
-    display block
-    content ''
-    min-width 100%
-    min-height 100%
-    background linear-gradient(left to top, 0% rgba($orange, 30%), 20% $orange, 40% $green, 70% $purple, 100% $purple)
-    z-index -2
-    opacity 0.3
-    box-shadow inset 0px 0px 40px 0px $deep-purple
-  &:after
-    display block
-    content ''
-    width 100%
+  #main
+    grid-unit(100%)
+    min-width 320px
     height 100%
+    top 0
+    font-family $body_font
+    font-size 15px
+    margin 0
+    padding 0
+    overflow-y scroll
+    -webkit-overflow-scrolling touch
+    text-rendering optimizeLegibility
+    font-smoothing antialiased
     position absolute
     top 0
     left 0
-    background $white
-    opacity 0.13
-    z-index -1
-
-  section
-    min-height 0
-    padding 0
-    z-index 2
+    float none
+  header
+    grid-unit(100%)
+    display block
+    height 30%
     overflow hidden
-  svg
-    position absolute
-    top 12%
-    left 0%
+    position relative
+  .main-menu
+    display block
+    position fixed
+    top 0px
+    left 0px
     width 100%
-    height 200%
-    z-index -1
-    #Regions
-      stroke $deep-purple
-      opacity 0.3
-    #Brain
-      path
-        stroke $deep-purple
-
-  .quote,
-  .social
-    grid-unit(50%)
-    margin 1em 0
-    padding 2em 4em 3em 4em
-    overflow hidden
-    h1, h2, h3, h4, h5, h6, p
-      color $white !important
-
-  .quote
-    background rgba($deep-purple, 70%)
-    color $white
-
-  .social
-    text-align center
-    letter-spacing 0.03em
+    height 60px
+    z-index 6
+    .hamburger
+      display none
     ul
-      margin 3em 0
-      padding 0
-      li
-        display inline
-        margin 1em 0.25em
-        font-size 3em
-        a
-          color $white
-          &:active,
-          &:hover
-            color $green
-        a:before
-          font-family "socicon"
-        .github
-          &:before
-            content "\e030      "
-        .twitter
-          &:before
-            content "\e040      "
-        .facebook
-          &:before
-            content "\e041      "
-        .linked-in
-          &:before
-            content "\e049      "
-.main-menu
-  grid-unit(100%)
-  position fixed
-  top 0
-  left 0
-  height 60px
-  background $black
-  background linear-gradient(left bottom to right top, 10% lighten($deep-purple, 2%), 100% lighten($deep-purple, 15%))
-  opacity 0.88
-  z-index 2
-  font-family 'Advent Pro'
-  font-weight 600
-  letter-spacing 0.05em
-  border-bottom 1px solid $deep-black
-  box-shadow 0px 0px 4px #111
-  .hamburger
-    float left
-    color $orange
-    padding 9px 0.5em
-    text-decoration none
-    border 1px solid $orange
-    background rgba($purple, 0%)
-    transition all 300ms linear
-    margin 10px 0.25em
-    display none
-    &:active,
-    &.active,
-    &:hover
-      color $green
-      border 1px solid $green
-      background $deep-purple
-  ul
-    display block
-    float left
-    margin 20px 0 0 3%
-    padding 0
-    li
-      list-style none
       display block
-      float left
-      margin-right 0.25em
-      a
-        color $white
-        padding 9px 0.5em
-        text-decoration none
-        border 1px solid $purple
-        background rgba($purple, 0%)
-        transition all 300ms linear
-        &:active,
-        &.active,
-        &:hover
-          color $green
-          border 1px solid $green
-          background $deep-purple
-  .logo
-    display block
-    float right
-    padding 6px 1% 1px 1%
-    margin 10px 4% 10px 0
-    height 28px
-    font-size 1.2em
-    text-decoration none
-    border 1px solid $orange
-    color $green
-    border 1px solid $green
-    background $deep-purple
-    cursor default
-    pointer-events none
-
-
-section
-  display block
-  clear both
-  width 100%
-  max-width 1400px
-  min-height 695px
-  margin 0 auto
-  box-sizing border-box
-  padding 3em 2% 3em 2%
-
-.post
-  column-count 2
-  column-gap 3em
-  text-align justify
-
-.posts
-  text-align justify
-  ul
-    list-style none
-    li
-      padding 2em
-      border-bottom 1px solid $orange
-
-.latest-by-category
-  text-align center
-  &:after
-    content ' '
-    clear both
-    display table
-  dl
-    grid-unit(33%)
+  .mobile-menu
+    grid-unit(100%)
+    height 100%
+    padding-top 60px
+    position absolute
+    top 0
+    left -100%
+    z-index 4
+    float none
+    overflow hidden
+  section
+    grid-unit(100%)
+    float none
+    max-width 1400px
+    min-height 70%
+    margin 2em auto
     box-sizing border-box
-    padding 2em 3em
-  dt, dd
-    margin 0
-  p
-    text-align left
-  svg
-    max-width 150px
-    height auto
-    margin 1em auto
-    #Regions
-      stroke $deep-purple
-    #Brain
-      path
-        stroke $deep-purple
-  .cerebral
-    svg
-      #Visual-Cortex,
-      #Auditory-Cortex
-        display none
-  .visual
-    svg
-      #Cerebral-Cortex,
-      #Auditory-Cortex
-        display none
-  .auditory
-    svg
-      #Cerebral-Cortex,
-      #Visual-Cortex
-        display none
+    padding 3em 2% 3em 2%
+  footer
+    grid-unit(100%)
+    position relative
+    z-index 0
+    margin-top 5em
+    overflow hidden
+    .quote,
+    .social
+      grid-unit(46%)
+      margin 2%
+      padding 1em 4em 2em 4em
+      box-sizing border-box
+      overflow hidden
+    &.small
+      height 90px
+      margin 0 auto
+      .social
+        grid-unit(100%)
+        h5,
+        ul
+          grid-unit(50%)
+          margin 1em 0
+  .latest-by-category
+    dl
+      grid-unit(33%)
+      box-sizing border-box
+      padding 0em 3em
+  .post
+    column-count 2
+    column-gap 3em
 
-.category-definition
-  display block
-  font-size 0.85em
-  padding-bottom 0.5em
-  margin-bottom 1.5em
-  border-bottom 1px solid $orange
-  p,
-  h5
-    margin 0.25em
-    color $black !important
-    text-align center
+@import "pages/index"
+@import "pages/posts"
+@import "components/header"
+@import "components/footer"
+@import "components/menu"
+
+@media only screen and (max-width: 1023px)
+  body
+    font-size 13px
+    .main-menu
+      .hamburger
+        display block
+      ul
+        display none
+        width 0
+    header
+      video
+        source
+          display none !important
+        &::-webkit-media-controls
+          display none !important
+    footer
+      .quote,
+      .social
+        grid-unit(96%)
+        margin 2%
+        padding 1em 4em 2em 4em
+        box-sizing border-box
+        overflow hidden
+      &.small
+        height auto
+        margin 0 auto
+        .social
+          grid-unit(100%)
+          h5,
+          ul
+            grid-unit(100%)
+            margin 1em 0
+    .latest-by-category
+      dl
+        grid-unit(100%)
+        box-sizing border-box
+        padding 0em 3em
+    .post
+      text-align left
+      column-count 1
+      column-gap 0
+

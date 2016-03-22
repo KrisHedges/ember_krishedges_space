@@ -31,9 +31,9 @@ defmodule KrishedgesSpace.Router do
 
   scope "/", KrishedgesSpace do
     pipe_through :browser # Use the default browser stack
-    get "/", StaticController, :public
     get "/admin", StaticController, :admin
     get "/admin/*path", StaticController, :admin
-    get "/*path", StaticController, :public
+    get "/", StaticController, :public
+    get "/*path", StaticController, :files
   end
 end
