@@ -14,8 +14,6 @@ defmodule KrishedgesSpace.Endpoint do
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
-    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
-    plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
 
@@ -35,7 +33,7 @@ defmodule KrishedgesSpace.Endpoint do
     key: "_krishedges_space_key",
     signing_salt: "PG0GBOeA"
 
-  plug Corsica, [origins: ["http://localhost:4200", "http://inkspeck.local:4200"], allow_headers: ["accept", "authorization", "content-type", "cache-control", "x-requested-with"]]
+  plug Corsica, [origins: ["http://localhost:4000", "http://localhost:4200", "http://inkspeck.local:4200"], allow_headers: ["accept", "authorization", "content-type", "cache-control", "x-requested-with"]]
 
   plug KrishedgesSpace.Router
 end

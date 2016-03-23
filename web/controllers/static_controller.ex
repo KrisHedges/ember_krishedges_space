@@ -1,11 +1,17 @@
 defmodule KrishedgesSpace.StaticController do
   use KrishedgesSpace.Web, :controller
   plug :add_cache_headers
+  require IEx
 
   def files(conn, %{"path" => path}) do
-    full_path = Enum.join(path, "/")
-    if File.exists?("priv/static/public/#{full_path}") do
-      Plug.Conn.send_file(conn, 200, "priv/static/public/#{full_path}")
+    full_path = ""
+    if List.first(path) === "assets" do
+      full_path = Enum.join(List.insert_at(path, 0, "public"), "/")
+    else
+      full_path = Enum.join(path, "/")
+    end
+    if File.exists?("priv/static/#{full_path}") do
+      Plug.Conn.send_file(conn, 200, "priv/static/#{full_path}")
     else
       public = File.read! "priv/static/public/index.html"
       html conn, public
