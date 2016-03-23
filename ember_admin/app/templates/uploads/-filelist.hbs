@@ -3,7 +3,7 @@
     {{#if (eq file.type "directory") }}
       <li class={{file.type}}>
         {{drop-zone url=uploadURL clickable=false addRemoveLinks=true sending=sendingFileEvent complete=uploadComplete previewTemplate=previewTemplate previewsContainer=".upload-previews" addRemoveLinks=false dictDefaultMessage="Drop here."}}
-        <a href={{file.path}} {{action 'browse'}}>{{file.filename}}</a>
+        <a href={{file.path}} {{action 'browse'}}>/{{file.filename}}</a>
         <button class='remove-file' {{action 'deleteFile' file }}>9</button>
         {{#if (gt file.children.length 0) }}
           {{partial "uploads/filelist" this}}
