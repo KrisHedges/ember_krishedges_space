@@ -25,8 +25,8 @@ defmodule KrishedgesSpace.Router do
     resources "/sessions", SessionController, only: [:create]
     resources "/posts", PostController, except: [:new, :edit]
     resources "/categories", CategoryController, except: [:new, :edit]
-    resources "/uploads", UploadController, only: [:index, :create]
-    delete "/uploads/*path", UploadController, :delete
+    resources "/uploads", HostedUploadController, only: [:index, :create]
+    delete "/uploads/*path", HostedUploadController, :delete
   end
 
   scope "/", KrishedgesSpace do

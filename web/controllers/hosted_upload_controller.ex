@@ -1,7 +1,6 @@
-defmodule KrishedgesSpace.UploadController do
+defmodule KrishedgesSpace.HostedUploadController do
   use KrishedgesSpace.Web, :controller
   use Guardian.Phoenix.Controller
-  require IEx
 
   plug :scrub_params, "file" when action in [:create]
   plug :scrub_params, "path" when action in [:create]
@@ -61,6 +60,5 @@ defmodule KrishedgesSpace.UploadController do
         |> render(KrishedgesSpace.ErrorView, "error.json", message: reason)
     end
   end
-
 end
 
