@@ -1,26 +1,105 @@
+@keyframes float
+  0%
+    transform rotate(0deg) translate(-50%, 0%)
+  33%
+    transform rotate(-2deg) translate(-50%, 0%)
+  66%
+    transform rotate(2deg) translate(-50%, 0%)
+  100%
+    transform rotate(0deg) translate(-50%, 0%)
+
+@keyframes synapse-fire
+  0%
+    transform scale(0,0)
+    opacity 0
+    fill $purple
+  65%
+    transform scale(0.99,0.99)
+    opacity 0.2
+    fill $purple
+  70%
+    transform scale(0.99,0.99)
+    opacity 0.08
+    fill $green
+  100%
+    transform scale(0.99,0.99)
+    opacity 0
+    fill $orange
+
 body
   header
     padding 7em 2em 4em 2em
-    background linear-gradient(top left to bottom right, 0% $orange, 20% $orange, 40% $green, 70% $purple, 100% $deep-purple)
+    background linear-gradient( left to top, 100% $deep-purple, 0% darken($purple, 30%))
     color $white
     text-align center
     user-select none
+    box-shadow inset 0px 0px 20px $deep-purple
     h1, h4, h2
       position relative
-      z-index 2
+      z-index 3
       color $white
       transform translateZ(0)
-    video
+    &:before
       position absolute
-      width 100%
-      min-height 100%
-      bottom 0
+      display block
+      top 0
       left 0
-      z-index 0
-      opacity 0.2
-      background-image url('assets/gridtile.png');
-      background-size 100% 100%
-    @media only screen and (max-width: 691px)
-      video
-        min-width 325%
-        min-height 100%
+      content ''
+      min-width 100%
+      min-height 100%
+      background linear-gradient(right to bottom, 0% rgba($orange, 30%), 20% $orange, 40% $green, 70% $purple, 100% $purple)
+      z-index 2
+      opacity 0.33
+      box-shadow inset 0px 0px 40px 0px $deep-purple
+    &:after
+      display block
+      content ''
+      width 100%
+      height 100%
+      position absolute
+      top 0
+      left 0
+      background url("noice.png"), $white
+      opacity 0.13
+      z-index 3
+    svg
+      position absolute
+      top -50%
+      left 50%
+      transform-origin(0%, 50%, 0)
+      width auto !important
+      height 250% !important
+      max-width 700% !important
+      max-height 700% !important
+      z-index 2
+      opacity 0.7
+      animation float 45s infinite
+      #Regions
+        stroke $deep-purple
+        #Cerebral-Cortex
+          path
+            transform scale(1,1)
+            transform-origin(50%, 25%, 0)
+            opacity 0
+            stroke none
+            fill $purple
+            animation synapse-fire 6s infinite
+        #Visual-Cortex
+          path
+            transform scale(1,1)
+            transform-origin(50%, 50%, 0)
+            opacity 0
+            fill $purple
+            stroke none
+            animation synapse-fire 3s infinite
+        #Auditory-Cortex
+          path
+            transform scale(1,1)
+            transform-origin(40%, 35%, 0)
+            opacity 0
+            animation synapse-fire 4s infinite
+            stroke none
+            fill $purple
+      #Brain
+        path
+          stroke $deep-purple !important
