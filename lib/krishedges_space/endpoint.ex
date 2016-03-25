@@ -33,7 +33,7 @@ defmodule KrishedgesSpace.Endpoint do
     key: "_krishedges_space_key",
     signing_salt: "PG0GBOeA"
 
-  plug Corsica, [origins: ["http://localhost:4000", "http://localhost:4200", "http://inkspeck.local:4200"], allow_headers: ["accept", "authorization", "content-type", "cache-control", "x-requested-with"]]
+  plug Corsica, [origins: ["http://www.krishedges-space.herokuapp.com", "https://www.krishedges-space.herokuapp.com", "http://www.krishedges.space", "http://www.krishedges.space", "https://www.krishedges.space", "https://krishedges.space", "http://localhost:4000", "http://localhost:4200", "http://inkspeck.local:4200"], allow_headers: ["accept", "authorization", "content-type", "cache-control", "x-requested-with"]]
 
   plug KrishedgesSpace.Router
 end
