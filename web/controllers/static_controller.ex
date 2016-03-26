@@ -11,16 +11,22 @@ defmodule KrishedgesSpace.StaticController do
       full_path = Enum.join(path, "/")
     end
     if File.exists?("priv/static/#{full_path}") do
-      Plug.Conn.send_file(conn, 200, "priv/static/#{full_path}")
+      conn
+      |> put_resp_content_type(Plug.MIME.path("priv/static/#{full_path}"), "utf-8")
+      |> Plug.Conn.send_file(200, "priv/static/#{full_path}")
     else
-      public = File.read! "priv/static/public/index.html"
-      html conn, public
+      public_html = File.read! "priv/static/public/index.html"
+      conn
+      |> put_resp_header("Content-Type", "text/html")
+      |> html(public_html)
     end
   end
 
   def public(conn, params) do
-    public = File.read! "priv/static/public/index.html"
-    html conn, public
+    public_html = File.read! "priv/static/public/index.html"
+    conn
+    |> put_resp_header("Content-Type", "text/html")
+    |> html(public_html)
   end
 
   def admin(conn, params) do
