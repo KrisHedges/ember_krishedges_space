@@ -86,12 +86,13 @@ body
     overflow hidden
   section
     grid-unit(100%)
+    overflow visible
     float none
+    clear both
     max-width 1400px
-    min-height 70%
-    margin 2em auto
-    box-sizing border-box
-    padding 3em 2% 3em 2%
+    min-height 900px
+    margin 0 auto
+    padding 3em 2% 7em 2%
   footer
     grid-unit(100%)
     position relative
@@ -122,6 +123,8 @@ body
   .post
     column-count 2
     column-gap 3em
+    transform translate3d(0,0,0)
+    backface-visibility hidden
   iframe
     margin 1em auto
 
