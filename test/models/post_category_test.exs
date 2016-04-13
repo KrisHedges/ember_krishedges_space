@@ -3,7 +3,7 @@ defmodule KrishedgesSpace.PostCategoryTest do
 
   alias KrishedgesSpace.PostCategory
 
-  @valid_attrs %{}
+  @valid_attrs %{post_id: 1, category_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

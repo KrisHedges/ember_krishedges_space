@@ -2,7 +2,6 @@ defmodule KrishedgesSpace.UserController do
   use KrishedgesSpace.Web, :controller
   use Guardian.Phoenix.Controller
   alias KrishedgesSpace.User
-  require IEx
 
   plug :scrub_params, "user" when action in [:create, :update]
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # when not action in [:index, :create]
@@ -64,6 +63,4 @@ defmodule KrishedgesSpace.UserController do
     Repo.delete!(user)
     send_resp(conn, :no_content, "")
   end
-
-
 end
