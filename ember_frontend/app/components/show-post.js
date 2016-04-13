@@ -12,6 +12,7 @@ export default Ember.Component.extend({
     });
     $('.lightbox').on('click', function(){
       $(this).removeClass('visible');
+      $(this).find('img').attr('src','');
     });
     $(document).keyup(function(e) {
       if (e.keyCode == 27) $('.lightbox').click();
