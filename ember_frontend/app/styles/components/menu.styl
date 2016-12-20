@@ -80,10 +80,9 @@ body
             background $deep-purple
     .logo
       display block
-      position absolute
-      top 12px
-      right 4%
+      float right
       padding 10px 10px
+      margin 12px 3% 0 0
       font-size 15px
       line-height 1.2em
       text-decoration none
@@ -91,9 +90,14 @@ body
       color $green
       border 1px solid $green
       background $deep-purple
-      cursor default
-      pointer-events none
+      cursor pointer
       outline none
+      &:before
+        display none
+        content '^ '
+      &.jumpable
+        &:before
+          display inline
 
 body
   #main

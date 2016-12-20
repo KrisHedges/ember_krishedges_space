@@ -1,5 +1,6 @@
 defmodule KrishedgesSpace.CategoryView do
   use KrishedgesSpace.Web, :view
+  require IEx
 
   def render("index.json", %{categories: categories}) do
     %{categories: render_many(categories, KrishedgesSpace.CategoryView, "category.json")}

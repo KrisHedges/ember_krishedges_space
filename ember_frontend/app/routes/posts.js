@@ -1,7 +1,8 @@
 /* global $:FALSE */
 import Ember from 'ember';
+import pages from '../mixins/pages';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(pages,{
   model: function(){
     let self = this;
     return this.store.findAll('category').then(function(){
@@ -18,9 +19,10 @@ export default Ember.Route.extend({
     didTransition: function(){
       $('body').removeClass('mobile-menu-visible'); 
       $('.hamburger').removeClass('open');
-      let height = $(".header").outerHeight() - 60;
       if(screen.width < 1023){
-        $("#main").animate({ scrollTop: height }, 450);
+        Ember.run.schedule('afterRender', function () {
+          $("#main").animate({scrollTop: $("header").outerHeight() - 60}, 450);
+        });
       }
     }
   }

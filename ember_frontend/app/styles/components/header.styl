@@ -34,11 +34,13 @@ body
     text-align center
     user-select none
     box-shadow inset 0px 0px 20px $deep-purple
+    transform translate3d(0,0,0)
+    backface-visibility hidden
     h1, h4, h2
       position relative
       z-index 3
       color $white
-      padding 0 2em
+      padding 0 1em
       transform translateZ(0)
     &:before
       position absolute
@@ -75,6 +77,9 @@ body
       max-height 700% !important
       z-index 2
       opacity 0.7
+      backface-visibility hidden
+      backface-visibility hidden
+      transform-style preserve-3d
       #Regions
         stroke $deep-purple
         #Cerebral-Cortex
@@ -85,6 +90,8 @@ body
             stroke none
             fill $purple
             animation synapse-fire 12s infinite
+            backface-visibility hidden
+            transform-style preserve-3d
         #Visual-Cortex
           path
             transform scale(1,1)
@@ -93,6 +100,8 @@ body
             fill $purple
             stroke none
             animation synapse-fire 6s infinite
+            backface-visibility hidden
+            transform-style preserve-3d
         #Auditory-Cortex
           path
             transform scale(1,1)
@@ -101,8 +110,12 @@ body
             animation synapse-fire 8s infinite
             stroke none
             fill $purple
+            backface-visibility hidden
+            transform-style preserve-3d
       #Brain
         animation float 45s infinite linear
         transform-origin(50%, 50%, 0)
+        backface-visibility hidden
+        transform-style preserve-3d
         path
           stroke $deep-purple !important

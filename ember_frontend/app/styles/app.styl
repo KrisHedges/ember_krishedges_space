@@ -94,6 +94,8 @@ body
     min-height 900px
     margin 0 auto
     padding 3em 2% 7em 2%
+    transform translate3d(0,0,0)
+    backface-visibility hidden
   footer
     grid-unit(100%)
     position relative
@@ -131,6 +133,7 @@ body
 
 @import "pages/index"
 @import "pages/posts"
+@import "pages/loading"
 @import "components/header"
 @import "components/footer"
 @import "components/menu"

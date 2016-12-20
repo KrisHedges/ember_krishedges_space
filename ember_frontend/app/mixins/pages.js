@@ -10,5 +10,4 @@ export default Ember.Mixin.create({
     this._super(controller, model);
     controller.set('pages', this.pages());
   }
-
 });

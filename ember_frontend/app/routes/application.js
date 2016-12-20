@@ -1,8 +1,7 @@
 /* global $:FALSE */
 import Ember from 'ember';
-import pages from '../mixins/pages';
 
-export default Ember.Route.extend( pages,{
+export default Ember.Route.extend({
   actions: {
     didTransition: function(){
       $('body').removeClass('mobile-menu-visible');

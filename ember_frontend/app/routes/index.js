@@ -1,7 +1,8 @@
 /* global $:FALSE */
 import Ember from 'ember';
+import pages from '../mixins/pages';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(pages,{
   model: function(){
     return this.store.findAll("category").then(function(){
       return this.store.findAll("post");
