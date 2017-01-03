@@ -15,7 +15,7 @@ defmodule KrishedgesSpace.PostController do
 
 
   def public_index(conn, _params, current_user, claims) do
-    query = from p in Post, where: p.published == true
+    query = from p in Post, where: p.published
     posts = Repo.all(query) |> Repo.preload(:categories)
     render(conn, "index.json", posts: posts)
   end
