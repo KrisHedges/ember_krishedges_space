@@ -19,7 +19,7 @@ defmodule KrishedgesSpace.Mixfile do
   def application do
     [mod: {KrishedgesSpace, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :absinthe]]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,15 +30,16 @@ defmodule KrishedgesSpace.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.0.3"},
-     {:phoenix_ecto, "~> 1.1"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.1"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
+    [{:phoenix, "~> 1.2.0"},
+     {:phoenix_pubsub, "~> 1.0"},
+     {:phoenix_html, "~> 2.6"},
+     {:phoenix_ecto, "~> 3.0-rc"},
+     {:postgrex, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 1.2"},
      {:guardian, "~> 0.9.0"},
-     {:corsica, "~> 0.4"}]
+     {:corsica, "~> 0.4"},
+     {:absinthe, "~> 1.2.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
