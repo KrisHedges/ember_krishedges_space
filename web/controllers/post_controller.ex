@@ -8,26 +8,25 @@ defmodule KrishedgesSpace.PostController do
   plug :scrub_params, "post" when action in [:create, :update]
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } when not action in [:public_index, :show]
 
-  def index(conn, _params, current_user, claims) do
+  def index(conn, _params, _current_user, _claims) do
     posts = Repo.all(Post) |> Repo.preload(:categories)
     render(conn, "index.json", posts: posts)
   end
 
 
-  def public_index(conn, _params, current_user, claims) do
+  def public_index(conn, _params, _current_user, _claims) do
     query = from p in Post, where: p.published
     posts = Repo.all(query) |> Repo.preload(:categories)
     render(conn, "index.json", posts: posts)
   end
 
-
-  def create(conn, %{"post" => post_params}, current_user, claims) do
+  def create(conn, %{"post" => post_params}, current_user, _claims) do
     edit = %KrishedgesSpace.Edit{user_id: current_user.id}
     changeset = Post.changeset(%Post{}, post_params) |> Ecto.Changeset.put_embed(:edits, [edit])
 
     # If Published is true set the published_at Date
     if Map.get(post_params, "published") do
-      changeset = Ecto.Changeset.put_change(changeset, :published_at, Ecto.DateTime.utc)
+      Ecto.Changeset.put_change(changeset, :published_at, Ecto.DateTime.utc)
     end
 
     case Repo.insert(changeset) do
@@ -55,13 +54,13 @@ defmodule KrishedgesSpace.PostController do
   end
 
 
-  def show(conn, %{"id" => id}, current_user, claims) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id) |> Repo.preload(:categories)
     render(conn, "show.json", post: post)
   end
 
 
-  def update(conn, %{"id" => id, "post" => post_params}, current_user, claims) do
+  def update(conn, %{"id" => id, "post" => post_params}, current_user, _claims) do
     post = Repo.get!(Post, id) |> Repo.preload(:categories)
 
     # Add an Edit record to post
@@ -84,14 +83,15 @@ defmodule KrishedgesSpace.PostController do
 
     # If Published is False set the published_at Date to Nil
     # If published is true and there is no published_at Date add new date
-    case Map.get(post_params, "published") do
-      true ->
-        if !Map.get(post_params, "published_at") do
-          changeset = Ecto.Changeset.put_change(changeset, :published_at, Ecto.DateTime.utc)
-        end
-      false ->
-        changeset = Ecto.Changeset.put_change(changeset, :published_at, nil)
-    end
+    changeset =
+      case Map.get(post_params, "published") do
+        true ->
+          if !Map.get(post_params, "published_at") do
+            Ecto.Changeset.put_change(changeset, :published_at, Ecto.DateTime.utc)
+          end
+        false ->
+          Ecto.Changeset.put_change(changeset, :published_at, nil)
+      end
 
     # Finally Update our Post and refetch it with assosciations preloaded for the json view
     case Repo.update(changeset) do
@@ -105,7 +105,7 @@ defmodule KrishedgesSpace.PostController do
   end
 
 
-  def delete(conn, %{"id" => id}, current_user, claims) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     post = Repo.get!(Post, id) |> Repo.preload([:post_categories, :categories])
 
     # Here we use delete! (with a bang) because we expect

@@ -6,12 +6,12 @@ defmodule KrishedgesSpace.CategoryController do
   plug :scrub_params, "category" when action in [:create, :update]
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } when not action in [:index, :show]
 
-  def index(conn, _params, current_user, claims) do
+  def index(conn, _params, _current_user, _claims) do
     categories = Repo.all(Category) |> Repo.preload(:posts)
     render(conn, "index.json", categories: categories)
   end
 
-  def create(conn, %{"category" => category_params}, current_user, claims) do
+  def create(conn, %{"category" => category_params}, _current_user, _claims) do
     changeset = Category.changeset(%Category{}, category_params)
 
     case Repo.insert(changeset) do
@@ -28,12 +28,12 @@ defmodule KrishedgesSpace.CategoryController do
     end
   end
 
-  def show(conn, %{"id" => id}, current_user, claims) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     category = Repo.get!(Category, id) |> Repo.preload(:posts)
     render(conn, "show.json", category: category)
   end
 
-  def update(conn, %{"id" => id, "category" => category_params}, current_user, claims) do
+  def update(conn, %{"id" => id, "category" => category_params}) do
     category = Repo.get!(Category, id) |> Repo.preload(:posts)
     changeset = Category.changeset(category, category_params)
 
@@ -47,7 +47,7 @@ defmodule KrishedgesSpace.CategoryController do
     end
   end
 
-  def delete(conn, %{"id" => id}, current_user, claims) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     category = Repo.get!(Category, id) |> Repo.preload(:posts)
 
     # Here we use delete! (with a bang) because we expect

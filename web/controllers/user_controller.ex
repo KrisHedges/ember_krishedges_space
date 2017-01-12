@@ -6,17 +6,17 @@ defmodule KrishedgesSpace.UserController do
   plug :scrub_params, "user" when action in [:create, :update]
   plug Guardian.Plug.EnsureAuthenticated, %{ handler: { KrishedgesSpace.SessionController, :unauthenticated } } # when not action in [:index, :create]
 
-  def index(conn, _params, current_user, claims) do
+  def index(conn, _params, _current_user, _claims) do
     users = Repo.all(User) |> Repo.preload(:posts)
     render(conn, "index.json", users: users)
   end
 
-  def show(conn, %{"id" => id}, current_user, claims) do
+  def show(conn, %{"id" => id}, _current_user, _claims) do
     user = Repo.get!(User, id) |> Repo.preload(:posts)
     render(conn, "show.json", user: user)
   end
 
-  def create(conn, %{"user" => user_params}, current_user, claims) do
+  def create(conn, %{"user" => user_params}, _current_user, _claims) do
     changeset = User.changeset(%User{}, user_params)
     case Repo.insert(changeset) do
       {:ok, user} ->
@@ -30,13 +30,13 @@ defmodule KrishedgesSpace.UserController do
     end
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}, current_user, claims) do
+  def update(conn, %{"id" => id, "user" => user_params}, current_user, _claims) do
     user = Repo.get!(User, id)
-
+    changeset =
     if user_params["password"] != nil do
-      changeset = User.changeset(user, user_params)
+      User.changeset(user, user_params)
     else
-      changeset = User.no_pass_changeset(user, user_params)
+      User.no_pass_changeset(user, user_params)
     end
 
     if current_user != user and user_params["password"] != nil do
@@ -55,7 +55,7 @@ defmodule KrishedgesSpace.UserController do
     end
   end
 
-  def delete(conn, %{"id" => id}, current_user, claims) do
+  def delete(conn, %{"id" => id}, _current_user, _claims) do
     user = Repo.get!(User, id)
 
     # Here we use delete! (with a bang) because we expect

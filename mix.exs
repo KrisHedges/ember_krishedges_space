@@ -9,8 +9,8 @@ defmodule KrishedgesSpace.Mixfile do
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -34,6 +34,7 @@ defmodule KrishedgesSpace.Mixfile do
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_ecto, "~> 3.0-rc"},
+     {:phoenix_live_reload, "~> 1.0"},
      {:postgrex, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 1.2"},
