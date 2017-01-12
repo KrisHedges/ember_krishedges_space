@@ -1,0 +1,116 @@
+.post-edit-form
+  .publishing-info,
+  .file-browser
+    grid-unit(100%)
+    transition all 300ms linear
+    margin-top -100%
+    padding 0 0 2em 0
+    visibility hidden
+  &.file-browser-visible
+    .publishing-info
+      margin-top -100%
+    .file-browser
+      margin-top 60px
+      visibility visible
+  &.publishing-info-visible
+    .file-browser
+      margin-top -100%
+    .publishing-info
+      padding 0
+      margin-top 60px
+      visibility visible
+  .publishing-info
+    font-size 0.85em
+    margin-bottom 2em
+    input
+      width 75%
+      padding 0 0.75em
+      margin 0
+      height 30px
+      line-height 30px
+      border none
+      border-bottom 1px solid #666
+      background #efefef
+    label
+      padding 0 0.25em 0 0
+      margin 0 0.5em 0 0
+      height 30px
+      line-height 30px
+      clear left
+    textarea
+      display inline-block
+      width 85% !important
+      min-height 70px !important
+      height 70px !important
+      margin 0.5em 5% !important
+      padding 1em !important
+    p
+      grid-unit(60%)
+      padding 0 0.25em 0 0
+      margin 0 0.5em 0 0
+      min-height 30px
+      line-height 30px
+    .image
+      grid-unit(28%)
+      box-sizing border-box
+      padding 1em 1% 0 1.5%
+      img
+        width 75%
+        margin 1em 0
+        border 30px solid #efefef
+        background #efefef
+        height auto
+    .description
+      grid-unit(23%)
+      box-sizing border-box
+      padding 1em 2% 0 0.5%
+    .category-list
+      grid-unit(20%)
+      box-sizing border-box
+      padding 1em 1% 0 2%
+    .meta
+      grid-unit(28%)
+      box-sizing border-box
+      padding 1em 1% 0 2%
+
+.post-toolbar
+  background #efefef
+  border-bottom 1px solid #9a9a9a
+  button
+    button()
+    float right
+  .show-files
+  .show-publishing
+    float left
+    margin 0.2em 0.25em
+
+.post-editor
+  border-top 1px solid #9a9a9a
+  .editor
+    background #2d2d2d
+    border-top 44px solid #2d2d2d
+  textarea
+    width 100%
+    min-height 400px
+    height 100%
+    margin 0
+    padding 3em 4% 4em 4%
+    box-sizing border-box
+    resize none
+    background #2d2d2d
+    color #ccc
+    border 0
+    border-bottom 44px solid #2d2d2d
+.post-edit-preview
+  border-top 44px solid #fff
+  box-sizing border-box
+  & > h1
+    margin 0
+    & input
+      width 100%
+      margin 0 0 0.5em 0
+      padding-left 0
+      border 0
+      border-bottom 1px dashed #eee
+      &:required:invalid
+        border-bottom 1px solid #9a9a9a
